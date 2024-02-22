@@ -10,13 +10,16 @@
 	<h2>Задача 0</h2>
 	<p>Обчислити значення виразів</p>
 	<script>
+		// Вводимо необхідні дані
 		let a = parseInt(prompt('Введіть значення a:','5'))
 		let b = parseInt(prompt('Введіть значення b:','3'))
 		let c = parseInt(prompt('Введіть значення c:','10'))
+		// Знаходимо результат
 		let s1 = a + 12 + b
 		let s2 = Math.sqrt((a+b)/(2*a))
 		let s3 = Math.cbrt((a+b)*c)
 		let s4 = Math.sin(a / -b)
+		// Виводимо результат
 		document.write(`<ol>
 								<li>S1 = a + 12 + b = ${s1}</li>
 								<li>S2 = √'((a + b) / 2a) = ${s2}</li>

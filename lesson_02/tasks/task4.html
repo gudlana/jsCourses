@@ -11,11 +11,14 @@
 	<p>Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ (5% від загальної вартості).
 	</p>
 	<script>
+		// Вводимо необхідні дані
 		let productCost = parseFloat(prompt('Введіть вартість одиниці товару:','100'))
 		let productCount = parseFloat(prompt('Введіть кількість товару:','5'))
+		// Знаходимо результат
 		let productTotalCost = productCost * productCount
 		const COST_TAX = 0.05 
 		let productTotalCostTax = productTotalCost * COST_TAX
+		// Виводимо результат
 		document.write(`Загальна вартість товару: ${Math.round(productTotalCost)} грн та ПДВ (5% від загальної вартості): ${Math.round(productTotalCostTax)} грн`)
 	</script>
 </body>

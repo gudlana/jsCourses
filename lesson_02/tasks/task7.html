@@ -10,16 +10,19 @@
 	<h2>Задача 6</h2>
 	<p> З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки</p>
 	<script>
+		// Вводимо необхідні дані
 		let costProduct1 = parseFloat(prompt('Введіть вартість 1 товару :','10.10'))
 		let countProduct1 = parseInt(prompt('Введіть кількість 1 товару :','10'))
 		let costProduct2 = parseFloat(prompt('Введіть вартість 2 товару :','12.12'))
 		let countProduct2 = parseInt(prompt('Введіть кількість 2 товару :','2'))
 		let costProduct3 = parseFloat(prompt('Введіть вартість 3 товару :','100'))
 		let countProduct3 = parseInt(prompt('Введіть кількість 3 товару :','5'))
+		// Знаходимо результат
 		let costTotalProduct1 = costProduct1 * countProduct1
 		let costTotalProduct2 = costProduct2 * countProduct2
 		let costTotalProduct3 = costProduct3 * countProduct3
 		let costTotalPrice = costTotalProduct1 + costTotalProduct2 + costTotalProduct3
+		// Виводимо результат
 		document.write(`
 				<table border="1px">
 					<tr>
