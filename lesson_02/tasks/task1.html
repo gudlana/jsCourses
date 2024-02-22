@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 0</title>
+</head>
+<body>
+	<h2>Задача 0</h2>
+	<p>Обчислити значення виразів</p>
+	<script>
+		let a = parseInt(prompt('Введіть значення a:','5'))
+		let b = parseInt(prompt('Введіть значення b:','3'))
+		let c = parseInt(prompt('Введіть значення c:','10'))
+		let s1 = a + 12 + b
+		let s2 = Math.sqrt((a+b)/(2*a))
+		let s3 = Math.cbrt((a+b)*c)
+		let s4 = Math.sin(a / -b)
+		document.write(`<ol>
+								<li>S1 = a + 12 + b = ${s1}</li>
+								<li>S2 = √'((a + b) / 2a) = ${s2}</li>
+								<li>S3 = 3√'(a + b) c = ${s3}</li>
+								<li>S4 = sin(a / - b) = ${s4}</li>
+							</ol>`)
+	</script>
+</body>
+</html>

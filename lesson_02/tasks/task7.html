@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 6</title>
+</head>
+<body>
+	<h2>Задача 6</h2>
+	<p> З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки</p>
+	<script>
+		let costProduct1 = parseFloat(prompt('Введіть вартість 1 товару :','10.10'))
+		let countProduct1 = parseInt(prompt('Введіть кількість 1 товару :','10'))
+		let costProduct2 = parseFloat(prompt('Введіть вартість 2 товару :','12.12'))
+		let countProduct2 = parseInt(prompt('Введіть кількість 2 товару :','2'))
+		let costProduct3 = parseFloat(prompt('Введіть вартість 3 товару :','100'))
+		let countProduct3 = parseInt(prompt('Введіть кількість 3 товару :','5'))
+		let costTotalProduct1 = costProduct1 * countProduct1
+		let costTotalProduct2 = costProduct2 * countProduct2
+		let costTotalProduct3 = costProduct3 * countProduct3
+		let costTotalPrice = costTotalProduct1 + costTotalProduct2 + costTotalProduct3
+		document.write(`
+				<table border="1px">
+					<tr>
+						<th colspan='3'>Чек №452215</th>						
+					</tr>
+					<tr>
+						<td>Товар 1</td>
+						<td>${costProduct1} х ${countProduct1}</td>
+						<td>${costTotalProduct1}</td>
+					</tr>
+					<tr>
+						<td>Товар 2</td>
+						<td>${costProduct2} х ${countProduct2}</td>
+						<td>${costTotalProduct2}</td>
+					</tr>
+					<tr>
+						<td>Товар 3</td>
+						<td>${costProduct3} х ${countProduct3}</td>
+						<td>${costTotalProduct3}</td>
+					</tr>
+					<tr>
+						<th colspan='2'>Сума</th>	
+						<td>${costTotalPrice}</td>					
+					</tr>
+				</table>`)
+	</script>
+</body>
+</html>
