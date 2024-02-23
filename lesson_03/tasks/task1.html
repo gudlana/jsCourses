@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 1</title>
+</head>
+<body>
+	<h3>Задача 1</h3>
+	<p>З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або вивести, що кількість однакова.</p>
+
+	<h4>Позначення величин</h4>
+	<table>
+		<tr>
+			<th>Значення</th>
+			<th>Позначення</th>
+			<th>Тип</th>
+		</tr>
+		<tr>
+			<th>Ім'я першої дитини</th>
+			<td>nameFirstChild</td>
+			<td>String</td>
+		</tr>
+		<tr>
+			<th>Ім'я другої дитини</th>
+			<td>nameSecondChild</td>
+			<td>String</td>
+		</tr>
+		<tr>
+			<th>Кількість цукерок першої дитини</th>
+			<td>candiesFirstChild</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<th>Кількість цукерок другої дитини</th>
+			<td>candiesSecondChild</td>
+			<td>Number</td>
+		</tr>
+	</table>
+	<h4>Вивід даних</h4>	
+	<script>
+		// Вводимо необхідні дані
+		const nameFirstChild = prompt('Введіть ім\'я першої дитини','Петрик П\'яточкін')
+		const nameSecondChild = prompt('Введіть ім\'я другої дитини','Івасик-Телесик')
+		const candiesFirstChild = parseInt(prompt(`Скільки цукерок має ${nameFirstChild}`,'5'))
+		const candiesSecondChild = parseInt(prompt(`Скільки цукерок має ${nameSecondChild}`,'10'))
+		// Виводимо шукані дані
+		if (isFinite(candiesFirstChild) && isFinite(candiesSecondChild)){
+			if (candiesFirstChild > candiesSecondChild)
+				document.write(`${nameFirstChild} має більше цукерок ніж ${nameSecondChild}`)
+			else if (candiesFirstChild<candiesSecondChild)
+				document.write(`${nameSecondChild} має більше цукерок ніж ${nameFirstChild}`)
+			else if (candiesFirstChild === candiesSecondChild)
+				document.write(`${nameSecondChild} має стільки ж цукерок як і ${nameFirstChild}`)
+		}
+		else document.write('Щось пішло не так! Можливо немає у когось цукерок!')
+	</script>
+</body>
+</html>

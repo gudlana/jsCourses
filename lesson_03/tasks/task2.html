@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 2</title>
+</head>
+<body>
+	<h3>Задача 2</h3>
+	<p>З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.</p>
+
+	<h4>Позначення величин</h4>
+	<table>
+		<tr>
+			<th>Значення</th>
+			<th>Позначення</th>
+			<th>Тип</th>
+		</tr>
+		<tr>
+			<th>Ціна товару</th>
+			<td>costProduct</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<th>Кількість грошей</th>
+			<td>amountMoney</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<th>Решта грошей</th>
+			<td>restMoney</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<th>Вартість лотереї</th>
+			<td>costLottery</td>
+			<td>Number</td>
+		</tr>
+	</table>
+	<h4>Вивід даних</h4>	
+	<script>
+		// Вводимо необхідні дані
+		const costProduct = parseFloat(prompt('Введіть ціну товару','150.50 грн'))
+		const amountMoney = parseFloat(prompt('Введіть кількість грошей','200 грн'))			
+		let restMoney = amountMoney - costProduct
+		const costLottery = 4	
+		// Виводимо шукані дані
+		if (isFinite(costProduct) && isFinite(amountMoney)){
+			if (costProduct >= amountMoney)
+				document.write('Відмовленно у здійсненні операції! Недостатньо коштів!')
+			else if (restMoney >= costLottery)
+				document.write('Товар сплачено! Бажаєте придбати лотерею?')	
+				else document.write(`Товар сплачено! Ваша решта ${restMoney} грн`)		
+		}
+		else document.write('Некоректні вхідні дані!')
+	</script>
+</body>
+</html>

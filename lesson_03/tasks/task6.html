@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 6</title>
+</head>
+<body>
+	<h3>Задача 6</h3>
+	<p>З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.</p>
+
+	<h4>Позначення величин</h4>
+	<table>
+		<tr>
+			<th>Значення</th>
+			<th>Позначення</th>
+			<th>Тип</th>
+		</tr>
+		<tr>
+			<th>Номер дня тижня</th>
+			<td>weekNum</td>
+			<td>String</td>
+		</tr>
+	</table>
+	<h4>Вивід даних</h4>	
+	<script>
+		// Вводимо необхідні дані
+		const weekNum = prompt('Введіть номер дня тижня','6')
+		// Виводимо шукані дані
+		switch(weekNum){
+			case('1'): document.write('Понеділок')
+			break
+			case('2'): document.write('Вівторок')
+			break
+			case('3'): document.write('Середа')
+			break
+			case('4'): document.write('Четвер')
+			break
+			case('5'): document.write('П\'ятниця')
+			break
+			case('6'): document.write('Субота')
+			break
+			case('7'): document.write('Неділя')
+			break
+			default: document.write(`Невірні вхідні дані!`)			
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 5</title>
+</head>
+<body>
+	<h3>Задача 5</h3>
+	<p>З клавіатури вводиться назва категорії водія (А-мотоцикл, В-легковий автомобіль, С-вантажний автомобіль). Вивести на екран назву транспортного засобу, яким він може керувати.</p>
+
+	<h4>Позначення величин</h4>
+	<table>
+		<tr>
+			<th>Значення</th>
+			<th>Позначення</th>
+			<th>Тип</th>
+		</tr>
+		<tr>
+			<th>Назва категорії водія</th>
+			<td>driverCategory</td>
+			<td>String</td>
+		</tr>
+	</table>
+	<h4>Вивід даних</h4>	
+	<script>
+		// Вводимо необхідні дані
+		const driverCategory = prompt('Введіть назву категорії водія (А, В-легковий автомобіль, С-вантажний автомобіль)','А')
+		// Виводимо шукані дані
+		switch(driverCategory){
+			case('А'): document.write('Водій категорії А може керувати мотоциклом')
+			break
+			case('В'): document.write('Водій категорії В може керувати легковим автомобілем')
+			break
+			case('С'): document.write('Водій категорії С може керувати вантажним автомобілем')
+			break
+			default: document.write(`Категорії ${driverCategory} не існує!`)			
+		}
+	</script>
+</body>
+</html>
