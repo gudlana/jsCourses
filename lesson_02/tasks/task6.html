@@ -12,11 +12,13 @@
 	<script>
 		// Вводимо необхідні дані
 		let secondsPassed = parseInt(prompt('Введіть кількість секунд:','180'))
+		const SECONDS_IN_MINUTE = 60
+		const SECONDS_IN_HOUR = 3600
 		// Знаходимо результат
-		let minutesPassed = secondsPassed / 60
-		let hoursPassed = minutesPassed / 60
+		let hoursPassed = Math.floor(secondsPassed / SECONDS_IN_HOUR)
+		let minutesPassed =Math.floor((secondsPassed % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE)
 		// Виводимо результат
-		document.write(`Кількість секунд, що пройшла від початку доби: ${secondsPassed} - це ${minutesPassed} хвилин і ${hoursPassed} годин`)
+		document.write(`Кількість секунд, що пройшла від початку доби: ${secondsPassed} - це ${hoursPassed} год. і ${minutesPassed} хв.`)
 	</script>
 </body>
 </html>
