@@ -28,13 +28,15 @@
 	<script>
 		// Вводимо необхідні дані
 		const monthNum = parseInt(prompt('Введіть номер місяця','2'))
+		let resSeason
 		// Виводимо шукані дані
 	if (monthNum >= 1 && monthNum <=12 ) {
-		if (monthNum >= 3 && monthNum <= 5) document.write('Це місяць весни')
-		else if (monthNum >=6 && monthNum <= 8 ) document.write('Це місяць літа')
-		else if (monthNum >=9 && monthNum <= 11 ) document.write('Це місяць осені')
-		else document.write('Це зима')
-	} else document.write('Невірно введений номер місяця!')
+		if (monthNum <= 5) resSeason = 'Це місяць весни'
+		else if (monthNum <= 8 ) resSeason = 'Це місяць літа'
+		else if (monthNum <= 11 ) resSeason = 'Це місяць осені'
+		else resSeason = 'Це зима'
+	} else resSeason = 'Невірно введений номер місяця!'
+	document.write(resSeason)
 	</script>
 </body>
 </html>

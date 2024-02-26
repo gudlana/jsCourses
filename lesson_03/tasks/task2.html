@@ -44,15 +44,14 @@
 		// Вводимо необхідні дані
 		const costProduct = parseFloat(prompt('Введіть ціну товару','150.50 грн'))
 		const amountMoney = parseFloat(prompt('Введіть кількість грошей','200 грн'))			
-		let restMoney = amountMoney - costProduct
 		const costLottery = 4	
 		// Виводимо шукані дані
 		if (isFinite(costProduct) && isFinite(amountMoney)){
 			if (costProduct >= amountMoney)
 				document.write('Відмовленно у здійсненні операції! Недостатньо коштів!')
-			else if (restMoney >= costLottery)
+			else if ((amountMoney - costProduct) >= costLottery)
 				document.write('Товар сплачено! Бажаєте придбати лотерею?')	
-				else document.write(`Товар сплачено! Ваша решта ${restMoney} грн`)		
+				else document.write(`Товар сплачено! Ваша решта ${amountMoney - costProduct} грн`)		
 		}
 		else document.write('Некоректні вхідні дані!')
 	</script>
