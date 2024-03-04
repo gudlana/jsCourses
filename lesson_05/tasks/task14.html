@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 14</title>
+</head>
+<body>
+	<h3>Задача 14</h3>
+	<p>Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами.
+	</p>
+
+	<script>
+		const minNumber = parseFloat(prompt('Задайте мінімальне значення діапазону', '1'))
+		const maxNumber = parseFloat(prompt('Задайте максимальне значення діапазону ', '10'))
+		let sumOddNumbers = 0			
+			for(let j = 0; j < 5; j++){
+				for (let i = minNumber; i <= maxNumber; i++) {	
+				if(i%2 === 1) sumOddNumbers += i		
+			} 	
+		}
+		document.write(`Сума 5 непарних чисел діапазону від ${minNumber} до ${maxNumber} дорівнює ${sumOddNumbers}`)
+	</script>
+</body>
+</html>

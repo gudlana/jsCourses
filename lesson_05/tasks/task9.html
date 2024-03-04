@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 8</title>
+</head>
+<body>
+	<h3>Задача 8</h3>
+	<p>Вивести 3 таблиці (по 3 рядки і 3 стовпці у кожній) за зразком </p>
+	<div class="block-table">
+	<script>
+		let countContentTable = 0
+		for (let table = 0; table < 3; table++) {
+			document.write('<table border="1px">')
+			for (let tr = 0; tr < 3; tr++) {
+				document.write('<tr>')
+				for (let td = 0; td < 3 ; td++) {
+					countContentTable++
+					document.write(`<td>${countContentTable}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
+		}				
+	</script>
+	</div>	
+</body>
+</html>

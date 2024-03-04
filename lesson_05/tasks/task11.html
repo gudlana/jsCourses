@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<title>Задача 13</title>
+</head>
+<body>
+	<h3>Задача 13</h3>
+	<p>Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).
+	</p>
+
+	<script>
+		alert('Загадайте число, а комп\'ютер вгадуватиме за 3 спроби')
+		const minNumber = parseFloat(prompt('Мінімальне значення діапазону загаданого числа', '1'))
+		const maxNumber = parseFloat(prompt('Максимальне значення діапазону загаданого числа', '10'))
+		
+		let resultText = ''
+		for (let i = 1; i <= 3; i++) {
+			let compNumber = minNumber + Math.floor( Math.random() * (maxNumber - minNumber + 1))
+			if (confirm(`Ви загадали число ${compNumber}? Так(OK) чи ні (Cancel)`)){
+				resultText = `Комп\'ютер вгадав Ваше число "${compNumber}" з ${i} спроби <br>Congratulations! Game over!`
+				break
+			} else { 
+				if (i === 3)
+				resultText = `Комп\'ютер не вгадав Ваше число <br> Game over!`
+				else alert(`Комп\'ютер не вгадав, залишилось ${3 - i} спроби `)
+			}
+		}  
+		document.write(resultText)
+	</script>
+</body>
+</html>

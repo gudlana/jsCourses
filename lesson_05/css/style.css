@@ -1,0 +1,58 @@
+.spring, .summer{
+	padding: 10px;
+	display: inline-block;
+	margin-right: 10px;
+	text-align: center;
+}
+.spring{
+	background-color: lightgreen;
+	border: 2px solid green;
+}
+.summer{
+	background-color: lightcoral;
+	border: 2px solid red;
+}
+span{
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.spring span{
+	color: green;
+}
+.summer span{
+	color: red;
+}
+.hello{
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: cornflowerblue;
+	border: 1px solid blue;
+
+}
+ol,ul{
+	margin: 10px 0;
+}
+.product-block{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.input-product{
+	display: flex;
+	column-gap: 10px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.label{
+	flex-basis: 80px;
+}
+td{
+	padding: 10px;
+}
+.block-table{
+	display: flex;
+	gap: 50px;
+}
