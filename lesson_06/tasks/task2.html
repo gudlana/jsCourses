@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 2</title>
+</head>
+<body>
+	<h3>Задача 2</h3>
+	<p>З клавіатури вводиться початкове значення суми. Поки сума є меншою за 100 додавати до неї числа, які вводяться з клавіатури.</p>
+	<script>
+		const maxSumValue = 100
+		let sumValue = parseFloat(prompt('Введіть початкове значення суми'))
+		if (isNaN(sumValue)){
+			alert('Введено некоректне початкове значення. Будь ласка введіть ще раз')
+		} else {
+			while(sumValue < maxSumValue){
+				let userValue = parseFloat(prompt(`Поточна сума ${sumValue} Введіть число для додавання або 0 для завершення:`))
+				sumValue += userValue
+				if (userValue === 0) break
+			}
+		}
+		document.write(`Сума доданих чисел: ${sumValue}`)
+	</script>
+</body>
+</html>

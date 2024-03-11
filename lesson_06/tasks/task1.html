@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 1</title>
+</head>
+<body>
+	<h3>Задача 1</h3>
+	<p> З клавіатури вводяться числа поки не буде введено 0. Знайти суму чисел.</p>
+	<script>
+		let sumUserNumbers = 0
+		let userNumber = 0
+		do{
+			userNumber = parseFloat(prompt('Введіть число (для закінчення - 0)'))
+			sumUserNumbers += userNumber
+		}
+		while(userNumber !== 0)
+		document.write(`Сума чисел: ${sumUserNumbers.toFixed(2)}`)
+	</script>
+</body>
+</html>

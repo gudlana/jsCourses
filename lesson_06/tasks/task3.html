@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 2</title>
+</head>
+<body>
+	<h3>Задача 3</h3>
+	<p>У комп’ютер вводяться по черзі дані про зріст N учнів класу. Визначити середній зріст учнів класу.</p>
+	<script>
+		let averageHeightStudents = 0
+		let countStudents = parseInt(prompt('Введіть кількість учнів класу', '10'))
+		for (let i = 1; i <= countStudents; i++) {
+			let heightStudent = parseFloat(prompt(`Введіть зріст ${i}-го учня`))
+			averageHeightStudents += heightStudent
+		}
+		document.write(`Середній зріст ${countStudents} учнів класу: ${(averageHeightStudents/countStudents).toFixed(2)}`)
+	</script>
+</body>
+</html>
