@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 9</title>
+</head>
+<body>
+	<style>
+		.banner{
+			position: relative;
+		}
+		img{
+			width: 300px;
+			border-radius: 30px;
+			box-shadow: 3px 3px 10px #000;
+			transition: transform 0.2s;
+		}
+		img:hover{
+			transform: scale(1.01);
+		}
+		span{
+			position: absolute;
+			bottom: 130px;
+			left: 90px;
+			text-transform: uppercase;
+			color: #fff;
+			font-weight: 800;
+			font-size: 20px;
+			transition: all 0.3s;
+		}
+	</style>
+	<h3>Задача 9</h3>
+	<p> Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при кліку на зображення (тег img повине знаходитись у середині тега a </p>
+	<script>
+		const linkBanner = 'https://gudlana.github.io/lessons/lesson_14/'
+		const titleBanner = 'Click here'
+		const imgBanner = '../img/banner.jpg'
+
+		function getBanner(linkBanner, titleBanner, imgBanner){
+			const bannerElement = 
+				`<a class="banner" href="${linkBanner}" target="_blank">
+					<img src="${imgBanner}">
+					<span>${titleBanner} </span>
+				</a>`
+			return bannerElement
+		}
+		document.write(getBanner(linkBanner, titleBanner, imgBanner))
+	</script>
+</body>
+</html>

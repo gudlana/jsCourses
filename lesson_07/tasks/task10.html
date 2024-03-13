@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 10</title>
+</head>
+<body>
+	<h3>Задача 10</h3>
+	<p> Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість від’ємних показів температури. </p>
+	<script>
+		function getCountNegativeTemperature(countValueTemperature){
+			let count = 0
+			for (let t = 0; t < countValueTemperature; t++) {
+				let valueTemperature = parseInt(prompt('Введіть показник температури'))
+				if(valueTemperature < 0) count++		
+			}
+			return count
+		}
+		let countValueTemperature = parseInt(prompt('Скільки показників температур ви хотіли проаналізувати?'))
+		let resultMessage = getCountNegativeTemperature(countValueTemperature)
+		document.write(`Кількість від’ємних показів температури ${resultMessage}`)
+	</script>
+</body>
+</html>

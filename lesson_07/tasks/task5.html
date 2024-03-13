@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 5</title>
+</head>
+<body>
+	<h3>Задача 5</h3>
+	<p>Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних, кількість додатних, кількість більших за 100.</p>
+	<script>
+		function calcNumbersMix(countNumbers){
+			let countEven = 0
+			let countPositive = 0
+			let countMoreHundred = 0
+			let totalNumbersValue = ''
+			for (let i = 0; i < countNumbers; i++) {
+				let numberValue = parseInt(prompt('Введіть число'))
+				if (numberValue % 2 === 0) countEven++
+				if (numberValue > 0)	countPositive++
+				if (numberValue > 100) countMoreHundred++	
+				totalNumbersValue += numberValue + ' '
+			}
+			return `Розглянуті числа: ${totalNumbersValue}<br>
+						Кількість парних чисел: ${countEven}<br>
+						Кількість додатних чисел: ${countPositive}<br>
+						Кількість більших за 100: ${countMoreHundred}`
+		}
+
+		document.write(calcNumbersMix(parseInt(prompt('Ведіть кількість чисел для розгляду фунцією'))))
+	</script>
+</body>
+</html>

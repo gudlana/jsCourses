@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 11</title>
+</head>
+<body>
+	<h3>Задача 11</h3>
+	<p> Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для додатних показів температури.</p>
+	<script>
+		function getCountNegativeTemperature(countValueTemperature=1){
+			let count = 0
+			let avgValue = 0
+			let valueTemperature = 0
+			for (let t = 0; t < countValueTemperature; t++) {
+				valueTemperature = parseInt(prompt('Введіть показник температури'))
+				if (valueTemperature > 0) {
+					count++	
+					avgValue += valueTemperature	
+				}
+			}
+			return (avgValue/count).toFixed(2)
+		}
+		let countValueTemperature = parseInt(prompt('Скільки показників температур ви хотіли проаналізувати?'))
+		let resultMessage = getCountNegativeTemperature(countValueTemperature)
+		document.write(`Cереднє значення для додатних показів температури ${resultMessage}`)
+	</script>
+</body>
+</html>

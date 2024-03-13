@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 6</title>
+</head>
+<body>
+	<h3>Задача 6</h3>
+	<p>Створити окремі функції, які переводять:</p>
+	<ol>
+		<li>Сантиметри у дюйми;</li>
+		<li>Кілограми у фунти;</li>
+		<li>Кілометри у милі.</li>
+	</ol>
+	<script>
+		function convertCentimetersToInches(smValue){
+			let incheValue = smValue * 0.393701
+			return `Результат конвертування: ${smValue} см = ${incheValue} дюймів`
+		}
+		function convertKilogramsToPounds(kgValue){
+			let poundValue = kgValue * 2.20462
+			return `Результат конвертування: ${kgValue} кг = ${poundValue} фунтів`
+		}
+		function convertKilometersToMiles(kmValue){
+			let mileValue = kmValue * 0.621371
+			return `Результат конвертування: ${kmValue} км = ${mileValue} міль`
+		}
+		function getResultSelectedItemMenu(item) {
+			let result
+			switch(item){
+				case(1): result = convertCentimetersToInches(parseInt(prompt('Скільки самтиметрів бажаєте конвертувати у дюйми?')))
+				return result
+				case(2): result = convertKilogramsToPounds(parseInt(prompt('Скільки кілограмів бажаєте конвертувати у фунти?')))
+				return result
+				case(3): result = convertKilometersToMiles(parseInt(prompt('Скільки кілометрів бажаєте конвертувати у милі?')))
+				return result
+				default: result = 'Оберіть пункт меню'
+				return result
+			}
+		}
+
+		const resultMessage = getResultSelectedItemMenu(parseInt(prompt('Введіть номер пункту меню ')))	
+		document.write(resultMessage)	
+	</script>
+</body>
+</html>
