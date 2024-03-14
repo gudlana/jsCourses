@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 4</title>
+</head>
+<body>
+	<h3>Задача 4</h3>
+	<p>Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:</p>
+	<script>
+		function	initialPaymentsArray(minValue=1,maxValue=5000,countValue=12){
+			let paymentsArray = []
+			for (let i = 0; i < countValue; i++) {
+				paymentsArray.push(minValue + Math.floor(Math.random()*(maxValue - minValue +1)))				
+			}
+			return paymentsArray
+		}
+		function getInfoPayments(paymentsArray){
+			let paymentsPerYear = 0
+			let paymentsFirstSixMonth = 0
+			let paymentsSecondSixMonth = 0
+			let paymentsPerSummer = 0
+			let paymentsSecondQuarter = 0
+			let paymentsEvenMonth = 0
+			let paymentsFirstMonthForSeasons = 0
+			for (let i = 0; i < paymentsArray.length; i++) {
+				paymentsPerYear += paymentsArray[i]
+				if (i>=0 && i <=5) paymentsFirstSixMonth += paymentsArray[i]
+				if (i>=6 && i <=11) paymentsSecondSixMonth += paymentsArray[i]
+				if (i>=5 && i<=7) paymentsPerSummer += paymentsArray[i]
+				if (i>=3 && i<=5) paymentsSecondQuarter += paymentsArray[i]
+				if ((i+1)%2 === 0) paymentsEvenMonth += paymentsArray[i]
+				if (i === 2 || i === 5 || i === 11) paymentsFirstMonthForSeasons += paymentsArray[i]
+			}
+			return `
+				<h4>послідовність платіжок протягом року: ${paymentsArray}</h4>
+				<ol>
+					<li>за весь рік: ${paymentsPerYear}</li>
+					<li>у першій половині року: ${paymentsFirstSixMonth}</li>
+					<li>у другій половині року: ${paymentsSecondSixMonth}</li>
+					<li>за літо: ${paymentsPerSummer}</li>
+					<li>за ІІ квартал: ${paymentsSecondQuarter}</li>
+					<li>за парні місяці (з парними номерами): ${paymentsEvenMonth}</li>
+					<li>за місяці, які є початковими у сезоні (весна, літо, осінь, зима): ${paymentsFirstMonthForSeasons}</li>
+				</ol>
+			`
+		}
+		let resultMessage = getInfoPayments(initialPaymentsArray())
+		document.write(resultMessage)
+	</script>
+</body>
+</html>

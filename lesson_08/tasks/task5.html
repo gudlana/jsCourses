@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 5</title>
+</head>
+<body>
+	<h3>Задача 5</h3>
+	<p>Задача 4. Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :</p>
+	<script>
+		function getInfoByCarNumbers(arrayCarNumbers){
+			let countCarNumBeginA = 0
+			let countCarNumEqualsLetter = 0
+			let countCarNumCharsMoreFive = 0
+			for (let i = 0; i < arrayCarNumbers.length; i++) {
+				let itemValue = String(arrayCarNumbers[i]) 
+				if (itemValue.charAt(0) === 'А') countCarNumBeginA++
+				if (itemValue.charAt(0) === itemValue.charAt(itemValue.length - 1)) countCarNumEqualsLetter++
+				if (itemValue.length > 5) countCarNumCharsMoreFive++
+			}
+			return `
+			<h4>Послідовність номерів автомобілів: ${arrayCarNumbers}</h4>
+				<ul>
+					<li>починаються на букву «А»: ${countCarNumBeginA}</li>
+					<li>перша і остання літери співпадають: ${countCarNumEqualsLetter}</li>
+					<li>складаються з більше ніш 5 символів: ${countCarNumCharsMoreFive}</li>
+				</ul>
+			`
+		}
+
+		let arrayCarNumbers = ['АА2653ВА','АА6597ВА','ВІ4716АХ','ВІ2853АТ','АT2653ВА','АААА']
+		let resultMessage = getInfoByCarNumbers(arrayCarNumbers)
+		document.write(resultMessage)
+	</script>
+</body>
+</html>

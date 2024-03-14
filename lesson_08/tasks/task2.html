@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 2</title>
+</head>
+<body>
+	<h3>Задача 2</h3>
+	<p>Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:</p>
+	<script>
+		function getInfoVisitorsShopPerWeek(...arrVisitorsPerWeek){
+			let daysWeekLessThan = []
+			let daysWeekMinVisitors = Math.min(...arrVisitorsPerWeek)
+			let minDays = []
+			let daysWeekMaxVisitors = Math.max(...arrVisitorsPerWeek)
+			let maxDays = []
+			let totalVisitorsWorkingDays = 0
+			let totalVisitorsWeekend = 0 
+			for (let i = 0; i < arrVisitorsPerWeek.length; i++) {
+				if (arrVisitorsPerWeek[i] < 20) daysWeekLessThan.push(i+1)
+				if (arrVisitorsPerWeek[i] === daysWeekMinVisitors) minDays.push(i+1)
+				if (arrVisitorsPerWeek[i] === daysWeekMaxVisitors) maxDays.push(i+1)
+				if ( i < 5) totalVisitorsWorkingDays += arrVisitorsPerWeek[i]
+				else totalVisitorsWeekend += arrVisitorsPerWeek[i]
+			}
+			return `
+				<ul>
+					<li>Номери днів, протягом яких кількість відвідувачів була меншою за 20 - ${daysWeekLessThan.toString()}</li>	
+					<li>номери днів, коли кількість відвідувачів була мінімальною - ${minDays.toString()}</li>
+					<li>номери днів, коли кількість відвідувачів була максимальною - ${maxDays.toString()}</li>
+					<li>загальна кількість клієнтів у робочі дні - ${totalVisitorsWorkingDays} та окремо загальну кількість клієнтів на вихідних - ${totalVisitorsWeekend}.</li>
+				</ul>
+			`
+		}
+		let arrVisitorsPerWeek = [100,50,100,5,80,5,19]
+		let infoList = getInfoVisitorsShopPerWeek(...arrVisitorsPerWeek)
+		document.write(infoList)
+	</script>
+</body>
+</html>

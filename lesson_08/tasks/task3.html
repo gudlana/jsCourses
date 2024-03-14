@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 2</title>
+</head>
+<body>
+	<h3>Задача 2</h3>
+	<p>Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів  (поки він не відмовиться). Знаходити сумарний виграш.</p>
+	<script>
+		function initialWinValue(minRange=-500, maxRange=500, countWinNumbers){
+			let arrWinValue = []
+			for (let i = 0; i < countWinNumbers; i++) {
+				let randomValue = minRange + Math.floor(Math.random()* (maxRange - minRange + 1))
+				arrWinValue.push(randomValue)				
+			}
+			return arrWinValue
+		}
+		function getWinner(array){
+			let isGame = true
+			let totalWinAmount = 0
+			let resultGame 
+			let arrChoice = []
+			do{
+				let userNumberchoice = parseInt(prompt(`Граємо! Оберіть номер від 1 до ${String(array.length)}`))
+				if (!isNaN(userNumberchoice))
+					{
+						totalWinAmount += array[userNumberchoice-1]
+						arrChoice.push(userNumberchoice)
+					}
+				isGame = confirm('Продовжуємо грати?')
+			} while(isGame)
+			if (totalWinAmount < 0) 
+				resultGame = `
+							Лоти, які приймали участь у грі: ${array}<br>
+							Ваші номери: ${arrChoice}<br>
+							Ваш борг становить: ${totalWinAmount}`
+			else resultGame = `
+							Лоти, які приймали участь у грі: ${array}<br>
+							Ваші номери: ${arrChoice}<br>
+							Ви вийграли: ${totalWinAmount}`
+			return resultGame
+		}
+
+		let userNumberchoice = parseInt(prompt('Починаємо гру! Скільки лотів беруть участь?'))
+		let arrWinValue = initialWinValue(-500,500,userNumberchoice)
+		let resultGame = getWinner(arrWinValue)
+		document.write(resultGame)
+	</script>
+</body>
+</html>
