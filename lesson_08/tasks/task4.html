@@ -17,38 +17,28 @@
 			}
 			return paymentsArray
 		}
-		function getInfoPayments(paymentsArray){
-			let paymentsPerYear = 0
-			let paymentsFirstSixMonth = 0
-			let paymentsSecondSixMonth = 0
-			let paymentsPerSummer = 0
-			let paymentsSecondQuarter = 0
-			let paymentsEvenMonth = 0
-			let paymentsFirstMonthForSeasons = 0
-			for (let i = 0; i < paymentsArray.length; i++) {
-				paymentsPerYear += paymentsArray[i]
-				if (i>=0 && i <=5) paymentsFirstSixMonth += paymentsArray[i]
-				if (i>=6 && i <=11) paymentsSecondSixMonth += paymentsArray[i]
-				if (i>=5 && i<=7) paymentsPerSummer += paymentsArray[i]
-				if (i>=3 && i<=5) paymentsSecondQuarter += paymentsArray[i]
-				if ((i+1)%2 === 0) paymentsEvenMonth += paymentsArray[i]
-				if (i === 2 || i === 5 || i === 11) paymentsFirstMonthForSeasons += paymentsArray[i]
+		function getPaymentsSumInRange(paymentsList, startMonth,endMonth,step=1){
+			let sum =0
+			for (let m = startMonth -1; m < endMonth; m+=step) {
+				sum +=paymentsList[m]				
 			}
-			return `
-				<h4>послідовність платіжок протягом року: ${paymentsArray}</h4>
-				<ol>
-					<li>за весь рік: ${paymentsPerYear}</li>
-					<li>у першій половині року: ${paymentsFirstSixMonth}</li>
-					<li>у другій половині року: ${paymentsSecondSixMonth}</li>
-					<li>за літо: ${paymentsPerSummer}</li>
-					<li>за ІІ квартал: ${paymentsSecondQuarter}</li>
-					<li>за парні місяці (з парними номерами): ${paymentsEvenMonth}</li>
-					<li>за місяці, які є початковими у сезоні (весна, літо, осінь, зима): ${paymentsFirstMonthForSeasons}</li>
-				</ol>
-			`
+			return sum
 		}
-		let resultMessage = getInfoPayments(initialPaymentsArray())
-		document.write(resultMessage)
+
+		let paymentsList = initialPaymentsArray()
+
+		document.write(`
+				<h4>послідовність платіжок протягом року: ${paymentsList}</h4>
+				<ol>
+					<li>за весь рік: ${getPaymentsSumInRange(paymentsList,1,12)}</li>
+					<li>у першій половині року: ${getPaymentsSumInRange(paymentsList,1,6)}</li>
+					<li>у другій половині року: ${getPaymentsSumInRange(paymentsList,7,12)}</li>
+					<li>за літо: ${getPaymentsSumInRange(paymentsList,6,8)}</li>
+					<li>за ІІ квартал: ${getPaymentsSumInRange(paymentsList,6,8)}</li>
+					<li>за парні місяці (з парними номерами): ${getPaymentsSumInRange(paymentsList,2,12,2)}</li>
+					<li>за місяці, які є початковими у сезоні (весна, літо, осінь, зима): ${getPaymentsSumInRange(paymentsList,3,12,3)}</li>
+				</ol>
+			`)
 	</script>
 </body>
 </html>
