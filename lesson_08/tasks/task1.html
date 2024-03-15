@@ -10,21 +10,40 @@
 	<h3>Задача 1</h3>
 	<p> Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча би одна трійка)).</p>
 	<script>
-		function getCategoryStudent(...arrRating){
-			let sumRating = 0
-			let categoryStudent
-			for (let i = 0; i < arrRating.length; i++) {
-				sumRating += arrRating[i]
+		function getMinScore(scoreList){
+			let min = scoreList[0]
+			for (let i = 0; i < scoreList.length; i++) {
+				if(scoreList[i] < min) min = scoreList[i]
 			}
-				if (Math.min(...arrRating) === 5) categoryStudent = 'відмінник'
-				if (Math.min(...arrRating) === 4) categoryStudent = 'хорошист'
-				if (Math.min(...arrRating) === 3) categoryStudent = 'трійочник'
-				if (Math.min(...arrRating) === 2) categoryStudent = 'двійочник'
-			return `Категорія учня - ${categoryStudent}, середній бал - ${(sumRating/arrRating.length).toFixed(1)}`
+			return min
 		}
-
-		const categoryStudent = getCategoryStudent(5,4,5,4,5) 
-		document.write(categoryStudent)
+		function getCategoryByMinScore(minScore){
+			let categoryStudent
+			switch (minScore) {
+				case 5:
+					categoryStudent = 'відмінник'
+					break;
+				case 4:
+					categoryStudent = 'хорошист'
+					break;
+				case 3:
+					categoryStudent = 'трійочник'
+					break;
+				default:
+					categoryStudent = 'двійочник'
+					break;
+			}
+			return categoryStudent
+		}
+		function getAverageScore(scoreList){
+			let averageScore = 0
+			for (let i = 0; i < scoreList.length; i++) {
+				averageScore +=scoreList[i]				
+			}
+			return (averageScore/scoreList.length).toFixed(1)
+		}
+		const scoreList = [4,3,3,4,5,5,4]
+		document.write(`Середній бал учня ${getAverageScore(scoreList)}, відноситься до категорії ${getCategoryByMinScore(getMinScore(scoreList))}`)
 	</script>
 </body>
 </html>
