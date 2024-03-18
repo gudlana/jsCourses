@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 4</title>
+</head>
+<body>
+	<h3>Задача 4</h3>
+	<p> Дано масив елементів. Вивести на екран елементи, що більші за 100</p>
+	<script>
+		function getNumbersMoreHundred(array){
+			let arrayResult = []
+			for (const item of array) {
+				if (item > 100) arrayResult.push(item)
+			}
+			return arrayResult
+		}
+		let arrNumbers = [45,652,267,15,15,88,1,659,3,25,659,845]
+		document.write(getNumbersMoreHundred(arrNumbers))
+	</script>
+</body>
+</html>

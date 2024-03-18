@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 10</title>
+</head>
+<body>
+	<h3>Задача 10</h3>
+	<p>Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у грн.</p>
+	<script>
+		let arrayPrice = [500,680,150,9631,1563,20,8465,254,789,1500,4600]
+		document.write(`${arrayPrice} <br>`)
+		let arrayTax = arrayPrice.map(item => item*0.2)
+		document.write(arrayTax)
+	</script>
+</body>
+</html>
