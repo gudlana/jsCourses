@@ -13,8 +13,9 @@
 		let arrNumbers = [45,-652,267,15,-15,88,1,659,3,-25,-659,845]
 		document.write(`${arrNumbers} <br>`)
 		arrNumbers.forEach((item ,index, array) => {
-			if (item > array[0])	document.write(`${index+1}-й елемент *2 = ${item*2} <br>`)
+			if (item > array[0]) array[index] *= 2
 		});
+		document.write(arrNumbers)
 	</script>
 </body>
 </html>

@@ -10,17 +10,17 @@
 	<h3>Задача 3</h3>
 	<p> Користувач вводить кількість елементів. Створити масив, у якому перші 5 елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.</p>
 	<script>
-		function createArray(){
-			let array
-			let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
-			if (!isNaN(userNumbers)) {
-					array = new Array(userNumbers)
+		function createArray(number){
+			let array			
+			if (!isNaN(number)) {
+					array = new Array(number)
 					array.fill(1,0,5)
 					array.fill(7,5)
 				}
 			return array
 		}
-		document.write(createArray())
+		let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
+		document.write(createArray(userNumbers))
 	</script>
 </body>
 </html>

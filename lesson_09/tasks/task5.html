@@ -11,9 +11,9 @@
 	<p>Дано масив елементів. Знайти добуток додатних елементів</p>
 	<script>
 		function getSumPositiveElements(array){
-			let sum = 0
+			let sum = 1
 			for (const item of array) {
-				if (item > 0) sum += item
+				if (item > 0) sum *= item
 			}
 			return sum
 		}

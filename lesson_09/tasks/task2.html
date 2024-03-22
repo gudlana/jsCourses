@@ -10,19 +10,18 @@
 	<h3>Задача 2</h3>
 	<p> Користувач вводить кількість елементів. Створити масив, у якому перша половина заповнена 1-цями, а друга заповнена 7-ками.</p>
 	<script>
-		function createArray(){
+		function createArray(number){
 			let array
-			let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
-			if (!isNaN(userNumbers)) {
-				let firstPart = Math.floor(userNumbers/2)
-				let lastPart = userNumbers - firstPart
-				array = new Array(userNumbers)
+			if (!isNaN(number)) {
+				let firstPart = Math.floor(number/2)
+				array = new Array(number)
 				array.fill(1,0,firstPart)
 				array.fill(7,firstPart)
 			}
 			return array
 		}
-		document.write(createArray())
+		let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
+		document.write(createArray(userNumbers))
 	</script>
 </body>
 </html>

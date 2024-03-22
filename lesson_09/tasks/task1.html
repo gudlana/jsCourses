@@ -10,16 +10,16 @@
 	<h3>Задача 1</h3>
 	<p> Користувач вводить кількість елементів. Створити масив, що складається з вказаної кількості елементів заповнених нулями.</p>
 	<script>
-		function createArray(){
+		function createArray(number){
 			let array
-			let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
-			if (!isNaN(userNumbers)) {
-				array = new Array(userNumbers)
+			if (!isNaN(number)) {
+				array = new Array(number)
 				array.fill(0)
 			}
 			return array
 		}
-		document.write(createArray())
+		let userNumbers = parseInt(prompt('Введіть кількість елементів масиву'))
+		document.write(createArray(userNumbers))
 	</script>
 </body>
 </html>
