@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашка №10. Методи масивів</title>
+</head>
+<body>
+    <h1>Домашка №10. Методи масивів</h1>
+    <h3>Задача. Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)<br>
+    </h3>
+   <script>
+        function getRandomNumber(minNumber,maxNumber){
+            return minNumber + Math.floor(Math.random()* (maxNumber - minNumber +1))
+        }
+        function getRandomArray(sizeArray,minNumber,maxNumber){
+            const array = []
+            for (let i = 0; i < sizeArray; i++) {
+                const randomNumber = getRandomNumber(minNumber,maxNumber)
+                array.push(randomNumber)
+            }
+            return array
+        }
+        const NUMBER_COMPARABLE = 1000
+        const sizeArray = parseInt(prompt('За який період бажаєте проаналізувати історію цін на цінні папери?'))
+        const arraySecurities = getRandomArray(sizeArray,1,10000)
+        document.write(`Згенерований масив за ${sizeArray} місяців: ${arraySecurities}`)
+        document.write('<ol>')
+        // Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+        const arraySecuritiesPricesMoreThousand = arraySecurities.filter(price => price > NUMBER_COMPARABLE)
+        document.write(`<li>Масив, у якому є тільки ті, що більші за 1000 грн.: ${arraySecuritiesPricesMoreThousand}</li>`)
+        // Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
+        const arraySecuritiesIndexesMoreThousand = arraySecurities.reduce(
+            (prevPricesIndexValue, price, index, array) => {
+                if (price > NUMBER_COMPARABLE) prevPricesIndexValue.push(index)
+                return prevPricesIndexValue
+            }, []
+        )
+        document.write(`<li>Масив,  у якому є номери тільки тих, що більші за 1000 грн.: ${arraySecuritiesIndexesMoreThousand}</li>`)
+        // Сформувати список з тих цін, які більші за попереднє значення
+        const arrayWherePriceNextMorePrev = arraySecurities.filter(
+            (price, index, array) => index !==0 && price > array[index - 1]
+        )
+        document.write(`<li>Масив з тих цін, які більші за попереднє значення: ${arrayWherePriceNextMorePrev}</li>`)
+        // Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+        const maxPriceValue = arraySecurities.reduce((prevPrice, price) => price > prevPrice ? price : prevPrice)
+        const arraySecuritiesInPercent = arraySecurities.map(price => Math.round(price * 100 / maxPriceValue))
+        document.write(`<li>Масив, що містить значення цін у відсотках стосовно максимального: ${arraySecuritiesInPercent}</li>`)
+        // Підрахувати кількість змін цін
+        const countPricesChanges = arraySecurities.reduce(
+            (prevPrice, price, index,array) => index !==0 && price !== array[index - 1] ? prevPrice + 1 : prevPrice, 0 
+        )
+        document.write(`<li>Кількість змін цін: ${countPricesChanges}</li>`)
+        // Визначити, чи є ціна, що менше 1000
+        const isPricesLessThousand = arraySecurities.some(price => price < NUMBER_COMPARABLE)?'Так':'Ні'
+        document.write(`<li>Чи є ціна, що менше 1000: ${isPricesLessThousand}</li>`)
+        // Визначати, чи усі ціни більше за 1000
+        const isAllPricesMoreThousand = arraySecurities.every(price => price > NUMBER_COMPARABLE)?'Так':'Ні'
+        document.write(`<li>Чи усі ціни більше за 1000: ${isAllPricesMoreThousand}</li>`)
+        // Підрахувати кількість цін, що більше за 1000
+        const countPricesMoreThousand = arraySecurities.reduce((prevPrice, price, index,array) => price > NUMBER_COMPARABLE ? prevPrice + 1 : prevPrice, 0)
+        document.write(`<li>Кількість цін, що більше за 1000: ${countPricesMoreThousand}</li>`)
+        // Підрахувати суму цін, що більше за 1000
+        const sumPricesMoreThousand = arraySecurities.reduce((prevPrice, price, index,array) => price > NUMBER_COMPARABLE ? prevPrice += price : prevPrice, 0)
+        document.write(`<li>Сума цін, що більше за 1000: ${sumPricesMoreThousand}</li>`)
+        // Знайти першу ціну, що більше за 1000
+        const firstPriceMoreThousand = arraySecurities.find(price => price > NUMBER_COMPARABLE)
+        document.write(`<li>Першу ціну, що більше за 1000: ${firstPriceMoreThousand}</li>`)
+        // Знайти індекс першої ціни, що більше за 1000
+        const firstIndexPriceMoreThousand = arraySecurities.findIndex(price => price > 1000)
+        document.write(`<li>Індекс першої ціни, що більше за 1000: ${firstIndexPriceMoreThousand}</li>`)
+        // Знайти останню ціну, що більше за 1000
+        const lastPriceMoreThousand = arraySecurities.findLast(price => price > NUMBER_COMPARABLE)
+        document.write(`<li>Остання ціна, що більше за 1000: ${lastPriceMoreThousand}</li>`)
+        // Знайти індекс останньої ціни, що більше за 1000
+        const lastIndexPriceMoreThousand = arraySecurities.findLastIndex(price => price > NUMBER_COMPARABLE)
+        document.write(`<li>Індекс останньої ціни, що більше за 1000: ${lastIndexPriceMoreThousand}</li>`)
+        document.write('</ol>')
+    </script>
+</body>
+</html>
