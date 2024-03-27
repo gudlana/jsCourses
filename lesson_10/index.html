@@ -39,7 +39,7 @@
         document.write(`<li>Масив,  у якому є номери тільки тих, що більші за 1000 грн.: ${arraySecuritiesIndexesMoreThousand}</li>`)
         // Сформувати список з тих цін, які більші за попереднє значення
         const arrayWherePriceNextMorePrev = arraySecurities.filter(
-            (price, index, array) => index !==0 && price > array[index - 1]
+            (price, index, array) => index > 0 && array[index - 1] < price
         )
         document.write(`<li>Масив з тих цін, які більші за попереднє значення: ${arrayWherePriceNextMorePrev}</li>`)
         // Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
@@ -67,7 +67,7 @@
         const firstPriceMoreThousand = arraySecurities.find(price => price > NUMBER_COMPARABLE)
         document.write(`<li>Першу ціну, що більше за 1000: ${firstPriceMoreThousand}</li>`)
         // Знайти індекс першої ціни, що більше за 1000
-        const firstIndexPriceMoreThousand = arraySecurities.findIndex(price => price > 1000)
+        const firstIndexPriceMoreThousand = arraySecurities.findIndex(price => price > NUMBER_COMPARABLE)
         document.write(`<li>Індекс першої ціни, що більше за 1000: ${firstIndexPriceMoreThousand}</li>`)
         // Знайти останню ціну, що більше за 1000
         const lastPriceMoreThousand = arraySecurities.findLast(price => price > NUMBER_COMPARABLE)
