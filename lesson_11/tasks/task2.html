@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <style>
+        table{
+            border: 1px solid #000;
+            text-align: center;
+        }
+        td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Задача 2. Дано інформацію про прибуток К магазинів протягом тижня.</h3>
+    <script>
+       function generateNumber(minValue, maxValue) {
+        let randomNumber = minValue + Math.floor(Math.random()*(maxValue - minValue + 1))
+        return randomNumber
+       }
+       function generateRandomArray(lengthArray=7, minValue=1, maxValue=1000) {
+        let arr = []
+        for (let i = 0; i < lengthArray; i++) {
+            let randomNumber= generateNumber(minValue, maxValue)
+            arr.push(randomNumber)
+        }
+        return arr
+       }
+       function generateRandomTable(rowsCount, colsCount,minValue, maxValue) {
+        let table = []
+        for (let row = 0; row < rowsCount; row++) {
+            const randomRow = generateRandomArray(colsCount, minValue, maxValue)   
+            table.push(randomRow)         
+        }
+        return table
+       }
+         //    функція html розмітки таблиці
+         function getHtmlTable(arr) {
+            let table = '<table border="1px">'
+            for (let row = 0; row < arr.length; row++) {
+                table += '<tr>'
+                for (let col = 0; col < arr[row].length; col++) {
+                    table += `<td>${arr[row][col]}</td>` 
+                }
+                table += '</tr>'
+            }
+           return table += '</table>'
+        }
+       const tableProfitOfShops = generateRandomTable(10,7,10,500)
+       document.write(getHtmlTable(tableProfitOfShops))
+       document.write('==========================================<br>')
+    //    загальний прибуток кожного масиву за тиждень;
+    // ---------------------------------------------------------------
+		function getTotalSumPerWeek(shopProfit) {
+			let arrayTotalSumPerWeek = [] 
+			
+			for (const shop of shopProfit) {
+				let sumProfit = 0
+				for (const profit of shop) {
+					sumProfit += profit
+				}
+				arrayTotalSumPerWeek.push(sumProfit)
+			}
+			return arrayTotalSumPerWeek
+		}
+		const arrayTotalSumPerWeek = getTotalSumPerWeek(tableProfitOfShops)
+		arrayTotalSumPerWeek.forEach((element, index) => document.write(`Загальний прибуток магазину ${index + 1} становить ${element} грн.<br>`))
+
+		document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    // загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.)
+	 function getTotalSumPerDaysWeek(shopProfit) {
+		let arrayTotalSumPerDay = []
+  	  	for (let day = 0; day < 7; day++) {
+			let sumProfitOfShopsPerDay = 0
+     		for (let profit = 0; profit < shopProfit.length; profit++) {
+				sumProfitOfShopsPerDay += shopProfit[profit][day]
+        	}
+      arrayTotalSumPerDay.push(sumProfitOfShopsPerDay)
+    	}
+		return arrayTotalSumPerDay
+	 }
+   const arrayTotalSumPerDay = getTotalSumPerDaysWeek(tableProfitOfShops)
+	arrayTotalSumPerDay.forEach((element, index) => document.write(`Загальний прибуток усіх магазинів за ${index + 1} день тижня становить ${element} грн.<br>` ))
+
+    document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    // загальний прибуток за робочі дні
+	 function getTotalSumPerWorkDays(shopProfit){
+	 	let arrayTotalSumPerWorkDays = []
+    	for (let day = 0; day < 5; day++) {
+        let sumProfitOfShopsPerWorkDays = 0
+        for (let profit = 0; profit < shopProfit.length; profit++) {
+			sumProfitOfShopsPerWorkDays += shopProfit[profit][day]
+        }
+       arrayTotalSumPerWorkDays.push(sumProfitOfShopsPerWorkDays)
+		}
+		return arrayTotalSumPerWorkDays
+	}
+	 const arrayTotalSumPerWorkDays = getTotalSumPerWorkDays(tableProfitOfShops)
+	 arrayTotalSumPerWorkDays.forEach((element, index) => document.write(`Загальний прибуток усіх магазинів за ${index + 1} робочий день тижня становить ${element} грн.<br>` ))
+    document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    // загальний прибуток за вихідні дні
+	 function getTotalSumPerWeekend(shopProfit) {
+		let arrayTotalSumPerWeekend = []
+    	for (let day = 5; day < 7; day++) {
+        let sumProfitOfShopsPerWeekend = 0
+        for (let profit = 0; profit < shopProfit.length; profit++) {
+			sumProfitOfShopsPerWeekend += shopProfit[profit][day]
+        }
+		  arrayTotalSumPerWeekend.push(sumProfitOfShopsPerWeekend)
+		}
+		return arrayTotalSumPerWeekend
+	 }
+	 const arrayTotalSumPerWeekend = getTotalSumPerWeekend(tableProfitOfShops)
+	 arrayTotalSumPerWeekend.forEach((element, index) => document.write(`Загальний прибуток усіх магазинів за ${index + 1} вихідний день становить ${element} грн.<br>`))
+	 document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    // максимальний прибуток за середу
+	 function getTotalSumPerWendsday(shopProfit){
+	 	let profitWendsday = 0
+    	for (const shop of shopProfit) {
+			let profit = shop[2]
+			if (profit > profitWendsday) profitWendsday = profit
+	 	}
+		return profitWendsday
+	}
+	 document.write(`максимальний прибуток за середу: ${getTotalSumPerWendsday(tableProfitOfShops)} <br>`)
+	 document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    //  сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+	 function getProfitMoreTwoHundred(shopProfit) {
+		return shopProfit.flat().filter(profit => profit > 200)
+	 }
+	 document.write('Загальний список (одновимірний масив) зі значенням, які що більші за 200: ' + getProfitMoreTwoHundred(tableProfitOfShops)+'<br>')
+	 document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    //  відсортувати кожен тиждень за зростанням
+	 function sortTableByInc(table) {
+		const tableBySort = JSON.parse(JSON.stringify(table))
+		tableBySort.forEach(array => {
+			array.sort((a,b) => a - b)
+		})
+		return tableBySort
+	 }
+	 const tableProfitOfShopsBySort = sortTableByInc(tableProfitOfShops)
+	 tableProfitOfShopsBySort.forEach((element, index)=> document.write(`Дохід магазину ${index+1} за зростанням: ${element} <br>`))
+	 document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    //  відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+	 function sortTableByDecrMaxValue(table) {
+		const tableBySortDecrMaxValue = JSON.parse(JSON.stringify(table))
+		tableBySortDecrMaxValue.sort((a,b)=>{
+				let maxA = Math.max(...a)
+				let maxB = Math.max(...b)
+				return maxB - maxA
+		})
+		return tableBySortDecrMaxValue
+	}	
+	 let tableBySortDecrMaxValue = sortTableByDecrMaxValue(tableProfitOfShops)
+	 tableBySortDecrMaxValue.forEach((element) => document.write(`Дохід магазину за спаданням максимального елемента у цьому тижні: ${element}<br>`))
+	 document.write('==========================================<br>')
+    // ---------------------------------------------------------------
+    //   упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+	 function sortTableByDecrSumValue(table) {
+		const tableBySortDecrSumValue = JSON.parse(JSON.stringify(table))
+		tableBySortDecrSumValue.sort((a,b) =>{
+			let sumA = a.reduce((prevSumValue, element) => (prevSumValue += element), 0)
+			let sumB = b.reduce((prevSumValue, element) => (prevSumValue += element), 0)
+			return sumB - sumA
+		})
+		return tableBySortDecrSumValue
+	 }
+	 let tableBySortDecrSumValue = sortTableByDecrSumValue(tableProfitOfShops)
+	 tableBySortDecrSumValue.forEach((element) => document.write(`Дохід магазину за спаданням суми доходу у цьому тижні: ${element}<br>`))
+    </script>
+</body>
+</html>

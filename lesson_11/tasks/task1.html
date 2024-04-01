@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <style>
+        table{
+            border: 1px solid #000;
+            text-align: center;
+        }
+        td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Задача 1. Знайти суми елементів у вказаній області</h3>
+    <script>
+        // функція генерування числа в діапазоні від minValue до maxValue
+       function getRandomNumber(minValue,maxValue) {
+        return minValue + Math.floor(Math.random()*(maxValue - minValue +1))
+       }
+    //    функція генерування одного одновимірного масиву (одного рядка)
+       function generateRandomArray(arrayLength, minValue, maxValue) {
+        const arr = []
+        for (let i = 0; i < arrayLength; i++) {
+            const randomNumber = getRandomNumber(minValue,maxValue)
+            arr.push(randomNumber)
+        }
+        return arr
+       }
+    //    функція генерування двовимірного масиву
+       function generateRandomTable(rowsCount, colCount,minValue, maxValue) {
+        const table = []
+        for (let i = 0; i < rowsCount; i++) {
+            const randomRow = generateRandomArray(colCount,minValue,maxValue)
+            table.push(randomRow)
+        }
+        return table
+       }
+    //    функція html розмітки таблиці
+        function getHtmlTable(arr) {
+            let table = '<table border="1px">'
+            for (let row = 0; row < arr.length; row++) {
+                table += '<tr>'
+                for (let col = 0; col < arr[row].length; col++) {
+                    table += `<td>${arr[row][col]}</td>` 
+                }
+                table += '</tr>'
+            }
+           return table += '</table>'
+        }
+        // номери рядків від 0 до половини, стовпці від 0 до половини
+        function getSumElements1(arr) {
+            let sum = 0
+            for (let row = 0; row < arr.length/2; row++) {
+                for (let col = 0; col < arr[row].length/2; col++) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        // номери рядків від 0 до половини, стовпці від половини до кінця
+        function getSumElements2(arr) {
+            let sum = 0
+            for (let row = 0; row < arr.length/2; row++) {
+                for (let col = arr[row].length/2; col < arr[row].length; col++) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        // номери рядків (від половини до кінця, стовпці від 0 до половини
+        function getSumElements3(arr) {
+            let sum = 0
+            for (let row = arr.length/2; row < arr.length; row++) {
+                for (let col = 0; col < arr[row].length/2; col++) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        // номери рядків від половини до кінця , стовпці від половини до кінця
+        function getSumElements4(arr) {
+            let sum = 0
+            for (let row = arr.length/2; row < arr.length; row++) {
+                for (let col = arr[row].length/2; col < arr[row].length; col++) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        function getSumElements5(arr) {
+            let sum = 0
+            for (let row = 1; row < arr.length; row+=2) {
+                for (let col = 0; col < arr[row].length; col++) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        function getSumElements6(arr) {
+            let sum = 0
+            for (let row = 0; row < arr.length; row++) {
+                for (let col = 0; col < arr[row].length; col+=2) {
+                    sum += arr[row][col]
+                }
+            }
+            return sum
+        }
+        function getSum(arr, infoGetterFunction){
+            return infoGetterFunction(arr)
+        }
+        const table = generateRandomTable(6,6,1,10)
+        document.write(getHtmlTable(table))
+        document.write(`<br>Сума елементів, номери рядків яких від 0 до половини, сповпців від 0 до половини: <strong> ${getSum(table,getSumElements1)}</strong>`)
+        document.write(`<br>Сума елементів, номери рядків яких від 0 до половини, стовпці від половини до кінця: <strong> ${getSum(table,getSumElements2)}</strong>`)
+        document.write(`<br>Сума елементів, номери рядків яких від половини до кінця, стовпці від 0 до половини: <strong>${getSum(table,getSumElements3)}</strong>`)
+        document.write(`<br>Сума елементів, номери рядків яких від половини до кінця, стовпці від половини до кінця: <strong>${getSum(table,getSumElements4)}</strong>`)
+        document.write(`<br>Сума парних рядків: <strong>${getSum(table,getSumElements5)}</strong>`)
+        document.write(`<br>Сума непарних стовпців: <strong>${getSum(table,getSumElements6)}</strong>`)
+    </script>
+</body>
+</html>

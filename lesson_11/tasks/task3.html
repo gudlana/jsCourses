@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <style>
+        table{
+            border: 1px solid #000;
+            text-align: center;
+        }
+        td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+    </h3>
+    <script>
+        function generateGameField(rowsCount, colsCount, shipCount) {
+            let gameField = []
+            for (let r = 0; r < rowsCount; r++) {
+                let row = new Array(colsCount).fill(0)
+                gameField.push(row)                
+            }
+            for (let s = 0; s < shipCount;) {
+                let r = Math.floor(Math.random()*rowsCount)                
+                let c = Math.floor(Math.random()*colsCount)
+                if (gameField[r][c] !==1){
+                    gameField[r][c] = 1
+                    s++
+                }                
+            }
+            return gameField
+        }
+        function play(gameField, shipCount, shellCount) {
+            while (shipCount>0 && shellCount>0) {
+                let r = parseInt(prompt('Введить номер рядка')) - 1
+                let c = parseInt(prompt('Введить номер стовпця')) - 1
+                if (gameField[r][c] === 1){
+                    alert('Попав!')
+                    gameField[r][c] = 0
+                    shipCount--
+                }else alert('Мимо!')
+                shellCount--
+            }
+            if (shipCount === 0) return 'Перемога!'
+            else return 'Програш'
+        }
+        function game(shipCount=5, shellCount=10, rowsCount=6,colsCount=6) {
+            let gameField = generateGameField(rowsCount,colsCount, shipCount)
+            console.log(gameField)
+            let result = play(gameField,shipCount,shellCount)
+            return result
+        }
+        document.write(game())
+    </script>
+</body>
+</html>
