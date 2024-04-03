@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка №12. </title>
+</head>
+<body>
+	<script src="js/script.js"></script>
+	<h1>Домашка №12. Сортування масивів</h1>
+	<ol>
+		<li>
+			<h3>Задача 1</h3>
+			<p><strong>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування бульбашкою.</strong></p>			
+	<script>
+	   let arraySortBubl = generateRandomArray(30, 1, 100)
+		document.write(`<p>Первинний масив: ${arraySortBubl} </p>`)
+		document.write(`<p>${getCountExchangeForSortBubl(arraySortBubl)}<div>`)
+		document.write(`<p>Масив відсортований методом Бульбашка: ${arraySortBubl}</p>`)
+	</script>
+		</li>
+		<li>
+			<h3>Задача 2</h3>
+			<p><strong>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування змішуванням.</strong></p>
+			<script>
+				let arraySortBublCocktail = generateRandomArray(30, 1, 100)
+				document.write(`<p>Первинний масив: ${arraySortBublCocktail} </p>`)
+				document.write(`<p>${getCountExchangeForSortBublCocktail(arraySortBublCocktail)}</p>`)
+				document.write(`<p>Масив відсортований методом Змішування: ${arraySortBublCocktail}</p>`)
+			</script>
+		</li>
+		<li>
+			<h3>Задача 3</h3>
+			<p><strong>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування включеннями.</strong></p>
+			<script>
+				let arrayInsertSort = generateRandomArray(30, 1, 100)
+				document.write(`<p>Первинний масив: ${arrayInsertSort} </p>`)
+				document.write(`${getCountExchangeForInsertSort(arrayInsertSort)}</p>`)
+				document.write(`<p>Масив відсортований методом Включення: ${arrayInsertSort}</p>`)
+			</script>
+		</li>
+		<li>
+			<h3>Задача 4</h3>
+			<p><strong>Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком </strong></p>
+			<img src="img/img.JPG" alt="Image">
+			<script>
+				// бульбашка
+				let arraySortBublExampleFour = generateRandomArray(30,1,100)
+				document.write(`<p>Первинний масив: ${arraySortBublExampleFour} </p>`)
+				document.write('Етапи сортування масиву методом Бульбашка')
+				document.write(getHtmlTable(getTableForSortBubl(arraySortBublExampleFour)))
+				// змішування
+				let arraySortBublCocktailExampleFour = generateRandomArray(30,1,100)
+				document.write(`<p>Первинний масив: ${arraySortBublCocktailExampleFour} </p>`)
+				document.write('Етапи сортування масиву методом змішування')
+				document.write(getHtmlTable(getTableForInsertSort(arraySortBublCocktailExampleFour)))
+				// включення
+				let arrayInsertSortExampleFour = generateRandomArray(30,1,100)
+				document.write(`<p>Первинний масив: ${arrayInsertSortExampleFour} </p>`)
+				document.write('Етапи сортування масиву методом включення')
+				document.write(getHtmlTable(getTableForInsertSort(arrayInsertSortExampleFour)))
+			</script>
+		</li>
+		<li>
+			<h3>Задача 5</h3>
+			<p><strong>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.</strong></p>
+			<script>
+				const names = [
+				'John',
+        		'Paul',
+        		'Olga',
+        		'Andrew',
+        		'Abrams',
+        		'Abba',
+        		'Peter',
+        		'Tina',
+        		'Olga',
+        		'Jack',
+        		'Peter',
+				]
+				document.write(`${names}<br>`)
+				const sortedNames = names.sort()
+				document.write(`${sortedNames}<br>`)
+				const searchIndex = findIndexBinarySearch(sortedNames, 'Olga')
+				if (searchIndex !== -1)
+				document.write(`ім’я «Olga» входить у масив під індексом ${searchIndex}`)
+				else document.write(`ім’я «Olga» не входить у масив`)
+			</script>
+		</li>
+		<li>
+			<h3>Задача 6</h3>
+			<p><strong>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.</strong></p>
+			<script>
+				const arrNames = [
+				'John',
+        		'Paul',
+        		'Olga',
+        		'Andrew',
+        		'Abrams',
+        		'Abba',
+        		'Peter',
+        		'Tina',
+        		'Olga',
+        		'Jack',
+        		'Peter',
+				]
+				document.write(`${arrNames}<br>`)
+				const sortedNamesByLenght = arrNames.sort((a,b)=> a.length - b.length)
+				document.write(`${sortedNamesByLenght}<br>`)
+				const searchIndexByLenght = findIndexByLenghtBinarySearch(sortedNamesByLenght,5)
+				if (searchIndexByLenght !== -1) document.write(`У масиві є ім’я довжиною 5 символів під індексом ${searchIndexByLenght}`)
+				else document.write(`У масиві немає імені довжиною 5 символів`)
+			</script>
+		</li>
+	</ol>
+</body>
+</html>
