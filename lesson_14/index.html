@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка № 14. Об'єкти</title>
+</head>
+<body>
+	<ol>
+		<li>
+			<h3>Задача 1</h3>
+			<p>Описати масив об’єктів – сайтів розроблених компанією з такими властивостями</p>
+			<ul>
+				<li>назва компанії на час розробки (назву періодично змінюють)</li>
+				<li>власник компанії</li>
+				<li>спонсори (масив спонсорів)
+					<ul>
+						<li>прізвище спонсора</li>
+						<li>м’я  спонсора</li>
+						<li>сума вкладень спонсора</li>
+					</ul>
+				</li>
+				<li>рік випуску</li>
+				<li>вартість сайту</li>
+			</ul>
+		</li>
+		<script>
+			let devSitesByCompanyList = [
+				{
+					titleCompany: 'FreelanserLiveStyle',
+					ownerCompany: 'Evgen Andrikanich',
+					investors: {
+						investorName: 'Gates',
+						investorFirstName: 'Bill',
+						invesmentAmount: 30000
+					},
+					productionYear: 2024,
+					price: 10000
+				},
+				{
+					titleCompany: 'CodeOnly',
+					ownerCompany: 'Evgen Andrikanich',
+					investors: {
+						investorName: 'Mask',
+						investorFirstName: 'Ilon',
+						invesmentAmount: 15000
+					},
+					productionYear: 2008,
+					price: 19654
+				},
+				{
+					titleCompany: 'GudlanaCompany',
+					ownerCompany: 'Svitlana Hudym',
+					investors: {
+						investorName: 'Hudym',
+						investorFirstName: 'Alex',
+						invesmentAmount: 156320
+					},
+					productionYear: 2025,
+					price: 1256
+				},
+				{
+					titleCompany: 'Merge',
+					ownerCompany: 'Pasha Tseluyko',
+					investors: {
+						investorName: 'Jeff',
+						investorFirstName: 'Bizos',
+						invesmentAmount: 25430
+					},
+					productionYear: 2000,
+					price: 16546
+				},
+				{
+					titleCompany: 'Brander',
+					ownerCompany: 'Someone',
+					investors: {
+						investorName: 'Hudym',
+						investorFirstName: 'Alex',
+						invesmentAmount: 150000
+					},
+					productionYear: 2023,
+					price: 6520
+				},
+			]
+	
+			// знайти загальну вартість усіх сайтів
+			let resTotalPrice = devSitesByCompanyList.reduce((prevPrice, site) =>
+				prevPrice+=site.price,
+				0)
+			document.write(`<ol><h3>Знайти:</h3><li>загальну вартість усіх сайтів: <strong>${resTotalPrice}$</strong></li>`)
+			
+			// кількість сайтів, що було зроблено між 2000 та 2009 рр.
+			let resCountSitesBetweenYears = devSitesByCompanyList.reduce(
+				(prevCount,site) => (site.productionYear >=2000 && site.productionYear<=2009) ?  ++prevCount : prevCount,
+				0
+			)
+			document.write(`<li>кількість сайтів, що було зроблено між 2000 та 2009 рр.: <strong>${resCountSitesBetweenYears}</strong></li>`)	
+	
+			// кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+			let resCountSitesInvestmentAmountMore = devSitesByCompanyList.reduce(
+				(prevCount, site)=> site.investors.invesmentAmount> 100000 ? ++prevCount: prevCount, 
+				0
+			)
+			document.write(`<li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000: <strong>${resCountSitesInvestmentAmountMore}</strong></li>`)
+			// створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+			let investorsName = devSitesByCompanyList.reduce(
+				(prevInvestor, site)=> [...prevInvestor, site.investors.investorFirstName+' '+site.investors.investorName],[]
+			)
+			document.write(`<li>загальний список усіх спонсорів: <strong>${investorsName}</strong></li>`)
+			// знайти рік, коли прибуток був найбільшим
+			let yearBigProfit = 0
+			let maxPrice = 0 
+			devSitesByCompanyList.forEach(site =>{
+				if (site.price > maxPrice){
+					maxPrice = site.price
+					yearBigProfit = site.productionYear
+				}
+			})
+			document.write(`<li>рік, коли прибуток був найбільшим: <strong>${yearBigProfit}</strong></li>`)
+			// упорядкувати список за спаданням прибутку
+			let devSitesByCompanyListSorted = devSitesByCompanyList.sort((item1,item2)=> item2.price - item1.price)
+			document.write(`<li>список за спаданням прибутку: `)
+			for (const obj of devSitesByCompanyListSorted) {
+				document.write(`<strong>${obj.price}, </strong></li>`)
+			}
+			// Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+			let devSitesByCompanyListCopyOne = JSON.parse(JSON.stringify(devSitesByCompanyList.filter(
+				(site) => site.price < 10000)
+			))
+			let devSitesByCompanyListCopyTwo = JSON.parse(JSON.stringify(devSitesByCompanyList.filter(
+				(site) => site.price >= 10000)
+			))
+			document.write(`<li><i>Список копії об’єктів, що містять сайти з вартістю до 10000:</i> <br>`)
+			for (const obj of devSitesByCompanyListCopyOne) {
+				document.write(`Компанія-замовник: ${obj.titleCompany}, вартість сайту: ${obj.price}<br>`)
+			}
+			document.write(`<i>Список копії об’єктів, що містять сайти з вартістю більше 10000:</i> <br>`)
+			for (const obj of devSitesByCompanyListCopyTwo) {
+				document.write(`Компанія-замовник: ${obj.titleCompany}, вартість сайту: ${obj.price}<br>`)
+			}
+			document.write('</ol>')	
+		</script>
+		<li>
+			<h3>Задача 2</h3>
+			<p>Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.</p>
+			<script>
+			let dateObject = {
+				day: 8,
+				month: 4,
+				year: 2024
+			}	
+			function getYearByFewMonth(obj, monthN) {
+				let allMonth = obj.month + monthN
+				let resYear = obj.year
+				while(allMonth > 12){
+					allMonth -=12
+					resYear++
+				}
+				return resYear
+			}
+			document.write(`Об'єкт, який передали в функцію: день: ${dateObject.day}, місяць: ${dateObject.month}, рік: ${dateObject.year} <br> через 569 місяців це буде ${getYearByFewMonth(dateObject, 569)} рік`)
+			</script>
+
+		</li>
+		<li>
+			<h3>Задача 3</h3>
+			<p>Дано масив об'єктів з інформацією про товари</p>	
+			<script>
+				let dataList = [
+					{
+						id:344277463,
+						old_price:1395,
+						old_usd_price: 37.70,
+						price:1099,
+						min_month_price:0,
+						sell_status:'available',
+						status:'active',
+						usd_price:29.70,
+						pl_charge_pcs:0,
+						pl_use_instant_bonus:false,
+						pl_premium_bonus_charge_pcs:0,
+						rests:-1,
+						min_price:0,
+						max_price:0,
+						has_shops:false,
+						info:null,
+						show_in_site:null
+					},
+					{
+						id:363766641,
+						old_price:0,
+						old_usd_price:0.00,
+						price:90,
+						min_month_price:0,
+						sell_status:'unavailable',
+						status:'active',
+						usd_price:2.43,
+						pl_charge_pcs:0,
+						pl_use_instant_bonus:false,
+						pl_premium_bonus_charge_pcs:0,
+						rests:-1,
+						min_price:0,
+						max_price:0,
+						has_shops:false,
+						info:null,
+						show_in_site:null
+					},
+					{
+						id:339273715,
+						old_price:38,
+						old_usd_price:1.03,
+						price:25,
+						min_month_price:0,
+						sell_status:'available',
+						status:'active',
+						usd_price:0.68,
+						pl_charge_pcs:0,
+						pl_use_instant_bonus:false,
+						pl_premium_bonus_charge_pcs:0,
+						rests:-1,
+						min_price:0,
+						max_price:0,
+						has_shops:false,
+						info:null,
+						show_in_site:null
+					},
+					{
+						id:330746665,
+						old_price:3087,
+						old_usd_price:83.43,
+						price:2548,
+						min_month_price:0,
+						sell_status:'available',
+						status:'active',
+						usd_price:68.86,
+						pl_charge_pcs:0,
+						pl_use_instant_bonus:false,
+						pl_premium_bonus_charge_pcs:0,
+						rests:-1,
+						min_price:0,
+						max_price:0,
+						has_shops:false,
+						info:null,
+						show_in_site:null
+					},
+					{
+						id:344972806,
+						old_price:699,
+						old_usd_price:18.89,
+						price:549,
+						min_month_price:0,
+						sell_status:'available',
+						status:'active',
+						usd_price:14.84,
+						pl_charge_pcs:0,
+						pl_use_instant_bonus:false,
+						pl_premium_bonus_charge_pcs:0,
+						rests:-1,
+						min_price:0,
+						max_price:0,
+						has_shops:false,
+						info:null,
+						show_in_site:null
+					}]
+
+				document.write('<ol><h3>Знайти:</h3>')
+				let totalPrice = dataList.reduce(
+					(prevSum, product)=> prevSum + product.price, 0
+				)
+				document.write(`<li>Загальну вартість (нові ціни - price): <strong>${totalPrice}</strong></li>`)
+				let countPriceHasFallen = dataList.reduce(
+					(prevCount, product) => product.price < product.old_price ? ++prevCount : prevCount, 0
+				)	
+				document.write(`<li> кількість товарів, у яких ціна зменшилась (price < old_price): <strong>${countPriceHasFallen}</strong></li>`)
+				let productAvailableList = dataList.filter(
+					product => product.sell_status === 'available'
+				)
+				document.write('<li>Товари, які доступні (sell_status:"available"):<br>')
+				productAvailableList.forEach(product=>
+					document.write(`Товар #${product.id}<br>`)	
+				)
+				document.write('</li>')
+				function createProduct(product) {
+					if (product.sell_status === 'available')
+					return{
+						id : product.id,
+						price: product.price,
+						old_price: product.old_price,
+						usd_price: product.usd_price
+					}
+				}
+				let newDataList = dataList.filter(createProduct)
+				document.write('<li>сформувати новий список об”єктів тільки доступних  для продажу товарів, які міститимуть тільки ідентифікатор товару (id), нову ціну (price), стару ціну (old_price), та ціну у доларах (usd_price):<br>')
+				newDataList.forEach(
+					product => document.write(`ідентифікатор товару #${product.id}, нова ціна ${product.price}, стара ціна ${product.old_price}, ціна у $ ${product.usd_price} <br>`)
+				)
+				document.write('</li>')
+				document.write('</ol>')	
+			</script>
+		</li>
+	</ol>
+</body>
+</html>
