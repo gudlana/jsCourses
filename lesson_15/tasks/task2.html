@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 2</title>
+	<script src="../js/script.js"></script>
+</head>
+<body>
+	<h3>Задача 2</h3>
+			<p>Створити об’єкт «Авто». </p>
+			<table border="1px">
+				<tr>
+					<td>Авто</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Поля(властивості)</td>
+					<td>Марка <br>
+						Розмір бака<br>
+						Кількість наявних літрів<br>
+						Кількість місць<br>
+						Кількість пасажирів<br>
+					</td>
+				</tr>
+				<tr>
+					<td>Методи (дії)</td>
+					<td>Заправка на вказану кількість літрів<br>
+						Виведення кількості пасажирів<br>
+						Додавання пасажирів<br>
+						Висадка пасажирів<br>
+					</td>
+				</tr>
+			</table>			
+			<script>				
+				document.write(`<p>${car.fillTankOfLiters(50)}</p>`)
+				document.write(`<p>${car.getPassengersNumber()}</p>`)
+				document.write(`<p>${car.addPassengers(3)}</p>`)
+				document.write(`<p>${car.outPassengers(2)}</p>`)
+			</script>
+	</script>			
+</body>
+</html>

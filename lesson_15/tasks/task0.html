@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 0</title>
+	<script src="../js/script.js"></script>
+</head>
+<body>
+	<h1>Задача 0</h1>
+	<p>Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.</p>
+	<p>Використати обидва методи стосовно обидвох об’єктів (використати call, apply)</p>
+	<script>				
+		let resMetdodObjectOneCall = objOne.getSum.call(objTwo)
+		let resMetdodObjectTwoCall = objTwo.getMultiplay.call(objOne,1,10)
+		let resMetdodObjectOneApply = objOne.getSum.apply(objTwo)
+		let resMetdodObjectTwoApply = objTwo.getMultiplay.apply(objOne,[1,10])
+		document.write(`Результат методу getSum першого об'єкту викликаний функцією call для властивості другого об'єкта дорівнює: ${resMetdodObjectOneCall} <br>`)
+		document.write(`Результат методу getMultiplay другого об'єкту викликаний функцією apply для властивості першого об'єкта дорівнює: ${resMetdodObjectTwoCall}<br>`)
+		document.write(`Результат методу getSum першого об'єкту викликаний функцією apply для властивості другого об'єкта дорівнює: ${resMetdodObjectOneApply} <br>`)
+		document.write(`Результат методу getMultiplay другого об'єкту викликаний функцією call для властивості першого об'єкта дорівнює: ${resMetdodObjectTwoApply}<br>`)
+	</script>			
+</body>
+</html>

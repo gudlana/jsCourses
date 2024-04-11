@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 4</title>
+	<script src="../js/script.js"></script>
+</head>
+<body>
+	<h3>Задача 4</h3>
+		<p>Розробити клас Baner</p>
+		<table border="1px">
+			<tr>
+				<td>Поля</td>
+				<td>Масив об’єктів ( графічних зображень та посилань на сайти)</td>
+			</tr>
+			<tr>
+				<td>Методи</td>
+				<td>Метод випадкового вибору об’єкта (графічного зображення та посилання)<br>
+					Метод виведення випадкового банера					
+				</td>
+			</tr>
+		</table>
+	<script>
+		let arrBaners = [
+			{
+				image: 'https://edu.fls.guru/img/logo.webp',
+				link: 'https://edu.fls.guru/angular.html'
+			},
+			{
+				image: 'https://content2.rozetka.com.ua/mb_logo/image_site_mini_logo/original/349608608.svg',
+				link: 'https://rozetka.com.ua/ua/'
+			}
+		]
+		let baner = new Baner(arrBaners)
+		baner.getRandomBaner()
+	</script>
+</body>
+</html>

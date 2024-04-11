@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 3</title>
+	<script src="../js/script.js"></script>
+</head>
+<body>
+	<h3>Задача 3</h3>
+		<p>Розробити клас MultChecker для перевірки таблиці множення</p>
+		<table border="1px">
+			<tr>
+				<td>Поля</td>
+				<td>Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)<br>
+					Кількість правильних відповідей<br>
+					Кількість неправильних відповідей<br>
+					</td>
+			</tr>
+			<tr>
+				<td>Методи</td>
+				<td>Генерування прикладу (метод випадковим чином визначає друге число, <br>перше число фіксоване)<br>
+					Перевірка правильності вказаної відповіді<br>
+					render - виведення інформації про тестування на екран<br>
+					</td>
+			</tr>
+		</table>
+	<script>
+		let numMult = parseInt(prompt('Введіть число таблиці множення:'))
+		let countExample = parseInt(prompt('Скільки прикладів хочете розв\'язати:'))
+		let multChecker = new MultChecker(0,0,0)
+		let i = 1
+		while(i<=countExample){
+			let answer = parseInt(prompt(`${multChecker.generateMultExamlpe(numMult)}`))
+			multChecker.checkingForCorrectAnswer(answer)
+			i++
+		}
+		document.write(multChecker.getRender())
+	</script>
+</body>
+</html>
