@@ -17,7 +17,7 @@
 				<li>спонсори (масив спонсорів)
 					<ul>
 						<li>прізвище спонсора</li>
-						<li>м’я  спонсора</li>
+						<li>Ім’я  спонсора</li>
 						<li>сума вкладень спонсора</li>
 					</ul>
 				</li>
@@ -30,55 +30,80 @@
 				{
 					titleCompany: 'FreelanserLiveStyle',
 					ownerCompany: 'Evgen Andrikanich',
-					investors: {
+					investors: [{
 						investorName: 'Gates',
 						investorFirstName: 'Bill',
 						invesmentAmount: 30000
 					},
+					{
+						investorName: 'John',
+						investorFirstName: 'Smith',
+						invesmentAmount: 50000
+					}],
 					productionYear: 2024,
 					price: 10000
 				},
 				{
 					titleCompany: 'CodeOnly',
 					ownerCompany: 'Evgen Andrikanich',
-					investors: {
+					investors: [{
 						investorName: 'Mask',
 						investorFirstName: 'Ilon',
 						invesmentAmount: 15000
 					},
+						{
+							investorName: 'John',
+							investorFirstName: 'Smith',
+							invesmentAmount: 50000
+						}],
 					productionYear: 2008,
 					price: 19654
 				},
 				{
 					titleCompany: 'GudlanaCompany',
 					ownerCompany: 'Svitlana Hudym',
-					investors: {
+					investors: [{
 						investorName: 'Hudym',
 						investorFirstName: 'Alex',
 						invesmentAmount: 156320
 					},
+						{
+							investorName: 'John',
+							investorFirstName: 'Smith',
+							invesmentAmount: 50000
+						}],
 					productionYear: 2025,
 					price: 1256
 				},
 				{
 					titleCompany: 'Merge',
 					ownerCompany: 'Pasha Tseluyko',
-					investors: {
+					investors: [{
 						investorName: 'Jeff',
 						investorFirstName: 'Bizos',
 						invesmentAmount: 25430
 					},
+						{
+							investorName: 'John',
+							investorFirstName: 'Smith',
+							invesmentAmount: 50000
+						}],
 					productionYear: 2000,
 					price: 16546
 				},
 				{
 					titleCompany: 'Brander',
 					ownerCompany: 'Someone',
-					investors: {
+					investors: [{
 						investorName: 'Hudym',
 						investorFirstName: 'Alex',
 						invesmentAmount: 150000
 					},
+						{
+							investorName: 'John',
+							investorFirstName: 'Smith',
+							invesmentAmount: 50000
+						}],
 					productionYear: 2023,
 					price: 6520
 				},
@@ -86,28 +111,33 @@
 	
 			// знайти загальну вартість усіх сайтів
 			let resTotalPrice = devSitesByCompanyList.reduce((prevPrice, site) =>
-				prevPrice+=site.price,
+				prevPrice + site.price,
 				0)
 			document.write(`<ol><h3>Знайти:</h3><li>загальну вартість усіх сайтів: <strong>${resTotalPrice}$</strong></li>`)
 			
 			// кількість сайтів, що було зроблено між 2000 та 2009 рр.
 			let resCountSitesBetweenYears = devSitesByCompanyList.reduce(
-				(prevCount,site) => (site.productionYear >=2000 && site.productionYear<=2009) ?  ++prevCount : prevCount,
+				(prevCount,site) => (site.productionYear >=2000 && site.productionYear<=2009) ?  prevCount +1 : prevCount,
 				0
 			)
 			document.write(`<li>кількість сайтів, що було зроблено між 2000 та 2009 рр.: <strong>${resCountSitesBetweenYears}</strong></li>`)	
 	
 			// кількість сайтів, де сума спонсорських вкладень була більшою за 100000
 			let resCountSitesInvestmentAmountMore = devSitesByCompanyList.reduce(
-				(prevCount, site)=> site.investors.invesmentAmount> 100000 ? ++prevCount: prevCount, 
-				0
-			)
+				(prevCount, site)=> {
+					return site.investors.reduce(
+					(prevSum, investor)=> prevSum + investor.invesmentAmount, 0) > 100000 ? prevCount + 1: prevCount
+				},	0)
+
 			document.write(`<li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000: <strong>${resCountSitesInvestmentAmountMore}</strong></li>`)
 			// створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
-			let investorsName = devSitesByCompanyList.reduce(
-				(prevInvestor, site)=> [...prevInvestor, site.investors.investorFirstName+' '+site.investors.investorName],[]
-			)
-			document.write(`<li>загальний список усіх спонсорів: <strong>${investorsName}</strong></li>`)
+			let arrayInvestors = []
+			for (const site of devSitesByCompanyList) {
+				for (const investor of site.investors) {
+					arrayInvestors.push(`${investor.investorName} ${investor.investorFirstName}`)
+				}
+			}
+			document.write(`<li>загальний список усіх спонсорів: <strong>${arrayInvestors}</strong></li>`)
 			// знайти рік, коли прибуток був найбільшим
 			let yearBigProfit = 0
 			let maxPrice = 0 
@@ -270,7 +300,7 @@
 				)
 				document.write(`<li>Загальну вартість (нові ціни - price): <strong>${totalPrice}</strong></li>`)
 				let countPriceHasFallen = dataList.reduce(
-					(prevCount, product) => product.price < product.old_price ? ++prevCount : prevCount, 0
+					(prevCount, product) => product.price < product.old_price ? prevCount + 1 : prevCount, 0
 				)	
 				document.write(`<li> кількість товарів, у яких ціна зменшилась (price < old_price): <strong>${countPriceHasFallen}</strong></li>`)
 				let productAvailableList = dataList.filter(
