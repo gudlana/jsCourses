@@ -84,9 +84,9 @@ class TDate {
 		return (year % 4 === 0 && year % 100 !==0) || year % 400 === 0
 	}
 	toString(){
-		return `${this.correctDate(this.Day) }.${this.correctDate(this.Month)}.${this.Year}`
+		return `${this.correctDateFormat(this.Day) }.${this.correctDateFormat(this.Month)}.${this.Year}`
 	}
-	correctDate(val){
+	correctDateFormat(val){
 		let res = ''
 		res += val
 		return res.length === 1 ? `0${res}`: res
