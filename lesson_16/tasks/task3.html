@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/script.js"></script>
+    <title>задача 3</title>
+</head>
+<body>
+    <h1>Задача 3</h1>
+    <p>Об’єкт “Фірма” (використати члени-класи)</p>
+    <table border="1px">
+        <tr>
+            <td>поля</td>
+            <td>
+                <ul>
+                    <li>назва фірми;</li>
+                    <li>дата заснування (рік, місяць);</li>
+                    <li>послуги (назва послуги, вартість, термін виконання);</li>
+                    <li>адреси філіалів (країна, місто, вулиця, номер будинку);</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>методи</td>
+            <td>
+                <ul>
+                    <li>визначення кількості років існування фірми;</li>
+                    <li>виведення всіх філіалів фірми у вказаному місті;</li>
+                    <li>виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <script>
+		try{
+       	const yearOld = new YearOld(12,2020)
+		 	const spaServices = [
+				new Services('масаж', 500, 1),
+				new Services('лімфодренаж', 500, 1),
+				new Services('кисневе обгортання', 1000, 1),
+				new Services('манікюр', 1500, 3),
+				new Services('цитрусовий пілінг', 2850, 3),
+				new Services('пропарювання тіла у римській парній', 3000, 3),
+				new Services('турецький лавандовий хамам', 2620, 3),
+		 	]
+		 	const adressOfBranches = [
+				new AddresOfBranches('Україна','Кременчук','Соборна', 26),
+				new AddresOfBranches('Україна','Київ','Хрещатик', 1),
+				new AddresOfBranches('Україна','Кременчук','Єднання України', 7),
+				new AddresOfBranches('Україна','Львів','площа Ринок', 2),
+				new AddresOfBranches('Україна','Харків','Каразіна', 6),
+		 	]
+		 	const spaRelax = new Firm('spaRelax',yearOld, spaServices,adressOfBranches)
+       	document.write(spaRelax)
+		 	document.write('<br>Перелік послуг по ціні 500грн та тривалістю 1 годину:<br>')
+		 	document.write(spaRelax.getServices(500,1))
+		 	document.write('<br>Перелік філіалів у місті Кременчук:<br>')
+		 	document.write(spaRelax.getAddressPerCity('Кременчук'))
+		} catch(e){
+			document.write(`${e.message}`)
+		}
+    </script>
+</body>
+</html>

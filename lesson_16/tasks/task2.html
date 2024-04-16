@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="../js/script.js"></script>
+	<title>Задача 2</title>
+</head>
+<body>
+	<h1>Задача 2</h1>
+	<p>Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі. </p>
+	<script>
+		const myAmount = new TMoney(0, 100)
+		document.write(myAmount)
+		document.write('<br>=====================<br>')
+		document.write(myAmount.dropFromAmount(1000) ? `Операція зняття: Успішне знання готівки`: 'Зняття: Недостатньо грошей на рахунку')
+		document.write('<br>=====================<br>')
+		document.write(myAmount)
+		document.write('<br>=====================<br>')
+		myAmount.addToAmount(1000)
+		document.write('Операція додавання: 1000 грн')
+		document.write('<br>=====================<br>')
+		document.write(myAmount)
+	</script>
+</body>
+</html>

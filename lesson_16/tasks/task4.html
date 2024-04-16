@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/script.js"></script>
+    <title>задача 3</title>
+</head>
+<body>
+    <h1>Задача 4</h1>
+	 <p>Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми. </p>    
+    <script>
+       try{
+			const cash = 1650
+			const bankomat = new TBankomat(0,10,50,50,100,30)
+			document.write(`Мінімальна сума для зняття: ${bankomat.getMinSum()}грн<br>`)
+			document.write(`Максимальна сума для зняття: ${bankomat.getMaxSum()}грн<br>`)
+			document.write(`Зняття ${cash}грн<br>`)
+			document.write(bankomat.getCash(cash))
+			document.write(`<br>Максимальна сума для зняття: ${bankomat.getMaxSum()}грн<br>`)
+		 }catch(e){
+			document.write(e.message)
+		 }
+    </script>
+</body>
+</html>
