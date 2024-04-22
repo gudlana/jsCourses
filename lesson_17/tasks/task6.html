@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="../js/script.js"></script>
+	<title>Задача 6</title>
+</head>
+<body>
+	<h3>Задача 6</h3>
+	<p>Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів  </p>
+			<p>Приклад.</p>
+			<p>	testsList= [<br>
+					{firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},<br>
+					{firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},<br>
+				]
+			</p>
+	<script>
+		const history = new History()
+		const testManager = new TestManager(history)
+		testManager.startTest(10)
+	</script>
+</body>
+</html>

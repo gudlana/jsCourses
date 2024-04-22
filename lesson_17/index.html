@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/script.js"></script>
+	<title>Домашка №17.  Класи. Статичні методи. Композиція, агрегація</title>
+</head>
+<body>
+	<h1>Домашка №17.  Класи. Статичні методи. Композиція, агрегація</h1>
+	<ol>
+		<li>
+			<h3>Задача 1</h3>
+			<p>Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)</p>
+			<script>
+				const arrNumbers = [4,-6,3,-7,5,6,-11,-54,-63,78]
+				document.write(`Дано масив: ${arrNumbers} <br>`)
+				document.write(`Кількість додатніх чисел в масиві: ${ArrayOperations.getCountPositiveNumbers(arrNumbers)}<br>`)
+				document.write(`Кількість від'ємних чисел в масиві: ${ArrayOperations.getCountNegativeNumbers(arrNumbers)}<br>`)
+				document.write(`Кількість входжень числа 6 в масиві: ${ArrayOperations.getCountIncludesNumber(arrNumbers, 6)}<br>`)
+			</script>
+		</li>
+		<li>
+			<h3>Задача 2</h3>
+			<p>Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити тільки один екземпляр цього класу.</p>
+			<script>
+				const driver1 = new CarCompany('Василь', 'Lanos', 'ВІ2653АХ')
+				document.write(driver1)
+			</script>
+		</li>
+		<li>
+			<a href="tasks/task3.html"><h3>Задача 3</h3></a>
+			<p>Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.
+			</p>
+		</li>
+		<li>
+			<h3>Задача 4</h3>
+			<p>Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою фірми</p>
+			<script>
+				let storageManager = new StorageManager(productsList, new Storage())
+				storageManager.addProductToStorage()
+				storageManager.printData()
+				document.write(`<strong>Відвантижили товар: <br> </strong>${storageManager.storage.productsList[0]}`)
+				storageManager.storage.removeProduct(productsList[0])
+				storageManager.printData()
+				document.write('<strong>Пошук товару по назві "Масло": <br></strong>')
+				document.write(storageManager.storage.searchProductByTitle('Масло'))
+				document.write('<strong>Пошук товару по виробнику "Ферма": <br></strong>')
+				document.write(storageManager.storage.searchProductByBrandTitle('Ферма'))
+			</script>
+		</li>
+		<li>
+			<h3>Задача 5</h3>
+			<p>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати додавання/вилучення книг та  вибір книг за назвою, за ПІБ автора, за видавництвом.
+			</p>
+			<script>
+				let sections = {
+					specialBooks: new Section({title: 'Спеціальна література'}),
+					hobbysBooks: new Section({title: 'Хоббі'}),
+					householdBooks: new Section({title: 'Домашнє домогосподарство'}),
+				}
+				let myLibrary = new Library(sections)
+				let book1 = new Book({firstName: 'Андрій', surname: 'Харук', birth: 1972, description: 'Андрій Харук — доктор історичних наук, автор понад 200 наукових, науково-популярних та навчально-методичних публікацій.',
+				titlePublisher: 'Фоліо', number: '978-5-4461-2269-1', foundationYear:2019,
+				title: 'Зроблено в Україні', genre: 'Спеціальна технічна література', 
+				})
+				let book2 = new Book({firstName: 'Лоренс Ларс', surname: 'Свекис ', birth: 1979, description: 'Лоренс Ларс Свекис — експерт в галузі іноваційних технологій.',
+				titlePublisher: 'Yakaboo', number: '978-966-03-7740-0', foundationYear:2023,
+				title: 'JavaScript с нуля до профи', genre: 'Спеціальна технічна література', 
+				})
+				myLibrary.sections['specialBooks'].addBookToSection(book1)
+				myLibrary.sections['specialBooks'].addBookToSection(book2)
+				myLibrary.printData()
+				document.write('Пошук книги "Зроблено в Україні":<br>')
+				let searchBooksByTitle = myLibrary.sections['specialBooks'].searchBookByTitle('Зроблено в Україні')
+				searchBooksByTitle.forEach(book => {
+					document.write(book.book.toString())
+				});
+				document.write('<br>Пошук книги видавництва "Yakaboo":<br>')
+				let searchBooksByPublisher = myLibrary.sections['specialBooks'].searchBookByPublisher('Yakaboo')
+				searchBooksByPublisher.forEach(book => {
+					document.write(book.book.toString())
+				});
+			</script>
+		</li>
+		<li>
+			<a href="tasks/task6.html"><h3>Задача 6</h3></a>
+			<p>Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів  </p>
+			<p>Приклад.</p>
+			<p>	testsList= [<br>
+					{firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},<br>
+					{firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},<br>
+				]
+			</p>
+		</li>
+	</ol>
+</body>
+</html>
