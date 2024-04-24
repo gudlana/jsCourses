@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/script.js"></script>
+	<style>
+		.block *{
+			margin-bottom: 5px;
+		}
+		.lab-box{
+			display: block;
+		}
+		.wishlist-item, td {
+			margin: 5px 20px;
+			text-align: center;
+			border: 2px solid violet;
+			font-size: 20px;
+			font-weight: 600;
+			color: blue;
+			padding: 10px;
+		}
+		.averageValue{
+			font-weight: 600;
+			font-size: 20px;
+		}
+	</style>
+	<title>Домашка №18. DOM, BOM, Document. Події початок </title>
+</head>
+<body>
+	<h1>Домашка №18. DOM, BOM, Document. Події початок </h1>
+	<ul>
+		<li>
+			<h3>Задача 1</h3>
+			<p> Розробити калькулятор</p>
+
+			<div class="block">
+				<Label class="lab-box">
+					First number
+					<input type="number" id="first" placeholder="0" value="0">
+				</Label>
+				<Label class="lab-box">
+					Second number
+					<input type="number" id="second" placeholder="0" value="0">
+				</Label>
+				<div id="operations">
+					<button onclick="calcSum()">Додати</button>
+					<button onclick="calcSubtr()">Відняти</button>
+					<button onclick="calcMult()">Помножити</button>
+					<button onclick="calcDiv()">Поділити</button>
+				</div>
+				<label>
+					Результат
+					<input type="number" id="result" placeholder="0">
+				</label>
+			</div>
+			<script>
+				function calcSum() {
+					const num1 = parseFloat(document.getElementById('first').value)
+					const num2 = parseFloat(document.getElementById('second').value)
+					const res = Calc.Sum(num1, num2)
+					document.getElementById('result').value = res
+				}
+				function calcSubtr() {
+					const num1 = parseFloat(document.getElementById('first').value)
+					const num2 = parseFloat(document.getElementById('second').value)
+					const res = Calc.Subtr(num1, num2)
+					document.getElementById('result').value = res
+				}
+				function calcMult() {
+					const num1 = parseFloat(document.getElementById('first').value)
+					const num2 = parseFloat(document.getElementById('second').value)
+					const res = Calc.Mult(num1, num2)
+					document.getElementById('result').value = res
+				}
+				function calcDiv() {
+					const num1 = parseFloat(document.getElementById('first').value)
+					const num2 = parseFloat(document.getElementById('second').value)
+					const res = Calc.Div(num1, num2)
+					document.getElementById('result').value = res
+				}
+			</script>
+			<hr>
+		</li>
+		<li>
+			<h3>Задача 2</h3>
+			<p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+			<div class="block">
+				<label class="lab-box">
+					Сума в гривнях
+					<input type="number" placeholder="0" id="grnValue">
+				</label>
+				<button onclick="convert()">Конвертувати</button>
+				<label class="lab-box">
+					Сума в доларах
+					<input type="number" placeholder="0" id="dollarValue">
+				</label>
+				<label class="lab-box">
+					Сума в євро
+					<input type="number" placeholder="0" id="euroValue">
+				</label>
+			</div>
+			<script>
+				function convert(){
+					const dollarRate = 40.5
+					const euroRate = 43.5
+					const grnValue = parseFloat(document.getElementById('grnValue').value)
+					const dollarValue = grnValue / dollarRate
+					const euroValue = grnValue / euroRate
+					document.getElementById('dollarValue').value = dollarValue.toFixed(2)
+					document.getElementById('euroValue').value = euroValue.toFixed(2)
+				}
+			</script>
+			<hr>
+		</li>
+		<li>
+			<h3>Задача 3</h3>
+			<p>Користувач задає рік народження. Визначити кількість років користувача.</p>
+			<div class="block">
+				<label class="lab-box">Рік народження
+					<input type="number" id="birth" value="0">
+				</label>
+				<div>Кількість років: <span id="yearsOld"></span></div>
+			</div>
+			<script>
+				function getYearsOld() {
+					document.getElementById('yearsOld').innerText = 2024 - parseInt(document.getElementById('birth').value)
+				}
+				document.getElementById('birth').onchange = getYearsOld
+			</script>
+			<hr>
+		</li>
+		<li>
+			<h3>Задача 4</h3>
+			<p>Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)</p>
+			<div id="wishlist"></div>
+			<script>
+				function getRandomIndex(arr) {
+					return 1 + Math.floor(Math.random()* arr.length - 1)
+				}
+				function getWishList() {
+					const divItems = document.createElement('div')
+					divItems.className = 'wishlist-items'
+					for (let i = 0; i < 3; i++) {
+						let divItem = document.createElement('div')
+						const randIndex = getRandomIndex(wishList)
+						divItem.innerText = wishList[randIndex]
+						divItem.className = 'wishlist-item'
+						divItems.append(divItem)
+						wishList.splice(randIndex,1)
+					}
+					return divItems
+				}
+				let wishList = [
+					'Свій будинок на березі озера',
+					'Виростити наших дітей особистостями',
+					'Вільне володіння англійською',
+					'Кругосвітня подорож',
+					'Злітати в Сан-Франциско на тиждень',
+					'Сплав на байдарках в Чорногорії',
+					'Побачити північне сяйво',
+					'Прочитати 20 книг за рік',
+				]
+
+				document.getElementById('wishlist').append(getWishList())			
+			</script>
+			<hr>
+
+		</li>
+		<li>
+			<h3>Задача 5</h3>
+			<p>Відобразити таблицю 3*4 з випадковими числами (її треба динамічно створити і вставити на сторінку)</p>
+			<div id="exampl5"></div>
+			<script>
+				function createTable(rowsNum, colsNum, min = 1, max = 100){
+					const tableEl = document.createElement('table')
+					for (let r = 0; r < rowsNum; r++) {
+						const trEl = document.createElement('tr')
+						for (let c = 0; c < colsNum; c++) {
+							const tdEl = document.createElement('td')							
+							const randNum = min + Math.floor(Math.random()*(max - min + 1))
+							tdEl.innerText = randNum
+							trEl.append(tdEl)
+						}		
+						tableEl.append(trEl)				
+					}
+					return tableEl
+				}
+				document.getElementById('exampl5').append(createTable(3,4))
+			</script>
+			<hr>
+		</li>
+		<li>
+			<h3>Задача 6</h3>
+			<p>
+				Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+			</p>
+			<div class="block">
+				<label class="lab-box">
+					Кількість оцінок
+					<input type="number" value="0" id="countScores">
+				</label>
+				<button onclick="createTableForScores()">Створити таблицю</button>
+				<div id="block-table"></div>
+				<button onclick="getAverageScores()">Середня оцінка</button>
+				<div class="averageValue"></div>
+			</div>
+			<script>
+				function createTableForScores(){
+					const scores = document.getElementById('countScores').value
+					const tableEl = document.createElement('table')
+					for (let s = 0; s < scores; s++) {
+						const trEl = document.createElement('tr')
+						tableEl.append(trEl)
+						const tdEl = document.createElement('td')
+						const inputEl = document.createElement('input')
+						inputEl.setAttribute('type','number')
+						inputEl.setAttribute('class', 'scores')
+						inputEl.setAttribute('placeholder', '0')
+						tdEl.append(inputEl)
+						trEl.append(tdEl)		
+						tableEl.append(trEl)				
+					}  
+					document.getElementById('block-table').append(tableEl)
+				}
+				function getAverageScores() {
+					const scoresElements = document.querySelectorAll('.scores')
+					let averageScores = 0
+					for (const scoresElement of scoresElements) {
+						const scoresValue = parseInt(scoresElement.value)
+						if (isNaN(scoresValue)) throw new Error('Некоректне значення')
+						averageScores +=scoresValue
+					}
+					const averageValue = averageScores / scoresElements.length
+					document.querySelector('.averageValue').innerText = averageValue.toFixed(1)
+				}
+			</script>
+			<hr>
+		</li>
+		<li>
+			<h3>Задача 7</h3>
+			<p>Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати  - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.
+			</p>
+			<div class="trip block">
+				<fieldset>
+					<legend class="lab-box">Вид транспорту</legend>
+					<select id="transport">
+						<option value="2000">авто</option>
+						<option value="1000">автобус</option>
+						<option value="3000">літак</option>
+					</select>
+				</fieldset>
+				<fieldset >
+					<legend class="lab-box">Харчування</legend>
+						<label for="breakfast">Сніданок</label>
+						<input id="breakfast" type="checkbox" class="food" value="200" checked>
+						<label for="lunch">Обід</label>
+						<input id="lunch" type="checkbox" class="food" value="400">
+						<label for="dinner">Вечеря</label>
+						<input id="dinner" type="checkbox" class="food" value="450">
+				</fieldset>
+				<fieldset >
+					<legend class="lab-box">Гід</legend>
+						<label for="tour-guide1">Гід 1</label>
+						<input id="tour-guide1" type="radio" name="guide" value="700">
+						<label for="tour-guide2">Гід 2</label>
+						<input id="tour-guide2" type="radio" name="guide"value="750">
+						<label for="tour-guide3">Гід 3</label>
+						<input id="tour-guide3" type="radio" name="guide" value="800" checked>
+				</fieldset>
+				<button id="total-price">Розрахунок</button>
+				<div>Загальна вартість: <span id="result-total-price"></span></div>
+			</div>
+			<script>
+				function getTotalPrice(){
+					const transportValue = parseFloat(document.querySelector('#transport').value)
+					const foodList = document.getElementsByClassName('food')
+					let foodSum = 0
+					for (const food of foodList) {
+						if (food.checked) foodSum += parseFloat(food.value)
+					}
+					const guideList = document.querySelectorAll('input[name="guide"]')
+					let guideSum = 0
+					for (const guide of guideList) {
+						if (guide.checked) guideSum += parseFloat(guide.value)
+					}
+					const totalPrice = transportValue + foodSum + guideSum
+					document.getElementById('result-total-price').innerText = totalPrice
+				}
+				window.onload = function(){
+					document.querySelector('#total-price').onclick = getTotalPrice
+				}
+			</script>
+			<hr>
+		</li>
+	</ul>
+</body>
+</html>
