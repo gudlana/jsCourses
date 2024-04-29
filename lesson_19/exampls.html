@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM - практика</title>
+	<style>
+      td {
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+      }
+    </style>
+</head>
+<body>
+	<h1>DOM - практика</h1>
+	<ul>
+		<li>
+			<h3>Задача. Crazy button. При наведенні кнопка повинна змінювати свій колір і позицію випадковим чином зміщаючись у деякому напрямку</h3>
+			<script>
+				class CrazyButton{
+					constructor(btnTitle, maxStep){
+						this.btnTitle =btnTitle
+						this.maxStep = maxStep
+					}
+					getRandomStep(){
+						return -this.maxStep + Math.floor(Math.random()* 2 * this.maxStep)
+					}
+					jump(){
+						console.log('1111111111');
+						const stepLeft = this.getRandomStep()
+						const stepTop = this.getRandomStep()
+						this.btn.style.left = parseInt(this.btn.style.left) + stepLeft + 'px'
+						this.btn.style.top = parseInt(this.btn.style.top) + stepTop + 'px'
+					}
+					render(containerSelector){
+						this.btn = document.createElement('button')
+						this.btn.innerText = this.btnTitle
+						this.btn.onmousemove =  this.jump.bind(this)
+
+						this.btn.style.position = 'absolute'
+						this.btn.style.left = '100px'
+						this.btn.style.top = '100px'
+						if(containerSelector)
+							document.querySelector(containerSelector).append(this.btn)
+					}
+				}
+				window.onload = function(){
+					const b1 = new CrazyButton('test', 50)
+					b1.render('#container')
+				}
+			</script>
+			<div id="container"></div>
+		</li>
+		<li>
+			<h3>Задача. Однорядковий сапер. Однорядкова таблиця, до клітинок якої додано інформацію про наявність міни (використати атрибути). Спочатку клітинки сірі. При натисненні на клітинку аналізується чи є там міна і тоді колір стає червоним, якщо немає – зеленим. Додати можливість відкриття усіх сусідніх незамінованих клітинок при відкритті незамінованої клітинки.</h3>
+			<table border="2px">
+				<tr>
+				  <td mine="1"></td>
+				  <td mine="0"></td>
+				  <td mine="1"></td>
+				  <td mine="0"></td>
+				  <td mine="0"></td>
+				  <td mine="0"></td>
+				  <td mine="0"></td>
+				  <td mine="0"></td>
+				  <td mine="1"></td>
+				</tr>
+			 </table>
+			 <script>
+				 function cellClick() {
+        const thisTd = this
+        const hasMine = thisTd.getAttribute('mine')
+        if (hasMine === '1') thisTd.style.backgroundColor = 'red'
+        else {
+          thisTd.style.backgroundColor = 'green'
+          //перебрати усі попередні поки немає міни і робити їх зеленими
+          let td = thisTd
+          while (td.previousElementSibling !== null) {
+            td = td.previousElementSibling
+            if (td.getAttribute('mine') === '1') break
+            td.style.backgroundColor = 'green'
+          }
+          //перебрати усі наступні поки немає міни і робити їх зеленими
+          td = thisTd
+          while (td.nextElementSibling !== null) {
+            td = td.nextElementSibling
+            if (td.getAttribute('mine') === '1') break
+            td.style.backgroundColor = 'green'
+          }
+        }
+      }
+      const tdList = document.querySelectorAll('td')
+      for (const td of tdList) {
+        td.onclick = cellClick
+      }
+			 </script>
+		</li>
+	</ul>
+</body>
+</html>

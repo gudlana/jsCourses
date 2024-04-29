@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body{
+			background-color: darkgrey;
+			overflow: hidden;
+		}
+		.snowflake{
+			position: absolute;
+        	width: 20px;
+        	height: 20px;
+        	background-color: #fff;
+       	border-radius: 50%;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Задача 1. Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою швидкістю рухається вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки сніжинка досягає нижньої частини екрану (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).</p>
+	<script>	
+		function createSnowflake() {
+			const snowflake = document.createElement('div');
+			snowflake.classList.add('snowflake');
+			snowflake.style.left = Math.random() * window.innerWidth + 'px';
+			snowflake.style.top = '0';
+			document.body.appendChild(snowflake);
+			
+			let top = 0;
+			const maxTop = window.innerHeight;
+			const speed = Math.random() * 5 + 1; // Випадкова швидкість падіння сніжинки
+			
+			const fallInterval = setInterval(() => {
+				top += speed;
+				snowflake.style.top = top + 'px';
+				if (top > maxTop) {
+						clearInterval(fallInterval);
+						snowflake.remove();
+						createSnowflake();
+				}
+			}, 50);
+		}
+		setInterval(createSnowflake, 1000);
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		div{
+			margin-bottom: 10px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: 800;
+			border: 2px solid blueviolet;
+			max-width: 200px;
+			text-align: center;
+			padding: 10px;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути зафарбовані у червоний колір.</p>
+	<p>Розв'язок</p>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<div>Hello!</div>
+	<script>
+		function changeColor() {
+			const thisDiv = this
+			div = thisDiv
+			while(div.nextElementSibling !== null){
+				div = div.nextElementSibling
+				div.style.backgroundColor = 'red'
+			}
+		}
+		const divList = document.querySelectorAll('div')
+		for (const divEl of divList) {
+			divEl.onclick = changeColor
+		}
+	</script>
+</body>
+</html>

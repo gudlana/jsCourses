@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.container{
+			display: flex;
+			gap: 20px;
+			min-height: 400px;
+		}
+		.athletes,
+		.athletes-chosen{
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+			min-width: 200px;
+			border: 1px solid #000;
+			padding: 5px;
+			
+		}
+		.athletes__item,
+		.athletes-chosen__item{
+			display: flex;
+			justify-content: space-between;
+			padding: 10px;
+			border: 1px solid #000;
+			column-gap: 50px;
+		}
+		.btn-to,
+		.btn-out{
+			padding: 10px;
+		}
+		.btn-to {
+			background-color: lightgreen;
+			background: url(../img/arrow-to.JPG) center no-repeat;
+		}
+		.btn-out {
+			background-color: tomato;
+			background: url(../img/arrow-from.JPG) center no-repeat;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний список.</p>
+	<p>Розв'язок:</p>
+	<div class="container"></div>
+	<script>	
+		const athletesAllList = [
+			{
+				id: 1,
+				name: 'John Depp'
+			},
+			{
+				id: 2,
+				name: 'Sara Wik'
+			},
+			{
+				id: 3,
+				name: 'Den Miro'
+			},
+			{
+				id: 4,
+				name: 'Alan Woo'
+			},
+			{
+				id: 5,
+				name: 'Olga Sich'
+			}
+		]
+		const athletesChosenList = [
+			{
+				id: 6,
+				name: 'Alex Hudym'
+			}
+			
+		]
+
+		function createAthletItem(athlete){
+			const divContent = document.createElement('div')
+			divContent.className = 'athletes__item'
+			const divTitle = document.createElement('div')
+			divTitle.innerText = athlete.name
+			divContent.append(divTitle)
+			divContent.setAttribute('id',athlete.id)
+			divContent.append(createArrowElement('to'))
+			return divContent
+		}
+		function createChosenAthletesItem(athlete){
+			const divContent = document.createElement('div')	
+			divContent.className = 'athletes-chosen__item'
+			const divTitle = document.createElement('div')
+			divTitle.innerText = athlete.name
+			divContent.append(divTitle)
+			divContent.append(createArrowElement('out'))
+			divContent.setAttribute('id',athlete.id)
+			return divContent
+		}
+		function createArrowElement(pos){
+			const btn = document.createElement('button')
+			btn.onclick = onClickBtn
+			if (pos === 'to')	btn.classList.add('btn-to')
+			else if (pos === 'out')	btn.classList.add('btn-out')
+			return btn
+		}
+		function onClickBtn(){
+			const thisEl = this
+			if (thisEl.parentElement.className === 'athletes__item'){
+				athletesAllList.forEach((value, key) =>{
+					if (value.id === parseInt(thisEl.parentElement.id)){
+						athletesChosenList.push(athletesAllList[key])
+						athletesAllList.splice(athletesAllList[key], 1)
+					}
+				})
+				const thisAthletes = thisEl.parentElement
+				const chosenAthletesList = document.querySelector('.athletes-chosen')
+				chosenAthletesList.append(thisAthletes)
+				thisAthletes.className = 'athletes-chosen__item'
+				thisAthletes.children[1].className = 'btn-out'
+			} else
+			if (thisEl.parentElement.className === 'athletes-chosen__item'){
+				athletesChosenList.forEach((value, key) =>{
+					if (value.id === parseInt(thisEl.parentElement.id)){
+						athletesAllList.push(athletesChosenList[key])
+						athletesChosenList.splice(athletesAllList[key], 1)
+					}
+				})
+				const thisAthletes = thisEl.parentElement
+				const chosenAthletesList = document.querySelector('.athletes')
+				chosenAthletesList.append(thisAthletes)
+				thisAthletes.className = 'athletes__item'
+				thisAthletes.children[1].className = 'btn-to'
+			}
+		}
+
+		function createTotalAthletesBox(athletesList) {
+			const divTotalAthletesBox = document.createElement('div')
+			const titleEl = document.createElement('h3')
+			titleEl.innerText = 'Загальний список'
+			divTotalAthletesBox.append(titleEl)
+			divTotalAthletesBox.className= 'athletes'
+			for (const athlete of athletesList) {
+				divTotalAthletesBox.append(createAthletItem(athlete))
+			}
+			return divTotalAthletesBox
+		}
+		function createChosenAthletesBox(athletesList){
+			const divChosenAthletesBox = document.createElement('div')
+			const titleEl = document.createElement('h3')
+			titleEl.innerText = 'Обрані для змагання'
+			divChosenAthletesBox.append(titleEl)
+			divChosenAthletesBox.className='athletes-chosen'
+			for (const athlete of athletesList) {
+				divChosenAthletesBox.append(createChosenAthletesItem(athlete))
+			}
+			return divChosenAthletesBox
+		}
+		window.onload = function(){
+			document.querySelector('.container').append(createTotalAthletesBox(athletesAllList),createChosenAthletesBox(athletesChosenList))	
+			console.log(athletesAllList);
+				console.log(athletesChosenList);
+		}
+	
+	</script>
+</body>
+</html>

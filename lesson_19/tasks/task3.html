@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		div{
+			margin-bottom: 10px;
+			cursor: pointer;
+			font-size: 18px;
+			font-weight: 600;
+			border: 2px solid blueviolet;
+			max-width: 150px;
+			text-align: center;
+			padding: 5px;
+		}
+		.liEven{
+			color: green;
+		}
+		.liOdd{
+			color: red;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у червоний.</p>
+	<p>Розв'язок:</p>
+	<div class="container"></div>
+	<button id="colored">Зафарбувати</button>
+	<script>
+		function getRandomNumber(min = 1, max = 100) {
+			return min + Math.floor(Math.random()* (max - min))
+		}
+		function getRandomCountLi(min = 1, max = 10) {
+			return min + Math.floor(Math.random()* (max - min))
+		}
+		function createUlElement() {
+			const ulEl = document.createElement('ol')
+			const countLiEl = getRandomCountLi()
+			for (let i = 0; i < countLiEl; i++) {
+				const liEl = document.createElement('li')
+				liEl.innerText = getRandomNumber()
+				ulEl.append(liEl)				
+			}
+			return ulEl
+		}
+		function changeColor() {
+			const ulElements = document.getElementsByTagName('ol')
+			for (const ulEl of ulElements) {
+				if (ulEl.childElementCount % 2 === 0) {
+					ulEl.className = 'liEven'
+				} else ulEl.className = 'liOdd'
+			}
+		}
+		window.onload = function(){
+			const divContainer = document.querySelector('.container')
+			for (let i = 1; i <= 5; i++) {
+				divContainer.append(createUlElement())
+			}
+			document.getElementById('colored').onclick = changeColor
+		}
+	</script>
+</body>
+</html>

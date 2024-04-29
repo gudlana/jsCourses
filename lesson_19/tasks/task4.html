@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		table{
+			border: 1px solid blue;
+			margin-bottom: 10px;
+		}
+		td{
+			padding: 20px;
+			border: 1px solid blue;
+		}
+		.container{
+			display: flex;
+			gap: 20px;
+		}
+		h4{
+			display: inline-block;
+		}
+		span{
+			display: inline-block;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).</p>
+	<p>Розв'язок:</p>
+	<div class="container"></div>
+	<script>
+	function getRandomNumber(min = 1, max = 100) {
+			return min + Math.floor(Math.random()* (max - min))
+	}
+	function createTableContainer() {
+		const divEl = document.createElement('div')
+		divEl.className = 'table-container'
+		const h4El = document.createElement('h4')
+		h4El.innerText = 'Кількість кліків:   '
+		const spanEl = document.createElement('span')
+		spanEl.setAttribute('count', 0)
+		divEl.append(h4El)
+		divEl.append(spanEl)
+		divEl.append(createTable())
+		return divEl
+	}
+	function createTable() {
+		const tableEl = document.createElement('table')
+		for (let r = 0; r < 3; r++) {
+			const trEl = document.createElement('tr')
+			for (let c = 0; c < 3; c++) {
+				const tdEl = document.createElement('td')
+				tdEl.innerText = getRandomNumber()
+				trEl.append(tdEl)
+			}
+			tableEl.append(trEl)
+		}
+		return tableEl
+	}
+	function updateSpanElement(value) {
+		
+	}
+	function onTableClick() {
+		const clickedTable = this
+		clickedTable.style.border = '3px solid red'
+		const previousEl = clickedTable.previousElementSibling
+		let countValue = previousEl.getAttribute('count')
+		countValue++
+		previousEl.innerText =  countValue
+		previousEl.setAttribute('count',countValue)
+	}
+	window.onload = function(){
+		for (let i = 0; i < 3; i++) {
+			document.querySelector('.container').append(createTableContainer())
+		}
+		const tableList = document.querySelectorAll('table')
+		for (const table of tableList) {
+			table.onclick = onTableClick
+		}
+	}
+	</script>
+</body>
+</html>

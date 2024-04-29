@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		.container{
+			display: flex;
+			gap: 20px;
+
+		}
+		.card-selected{
+			border: 2px solid green;
+			border-radius: 10px;
+		}
+		img{
+			width: 100%;
+			object-fit: cover;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при кліку робити toogle з класом вибраного елемента)</p>
+	<p>Розв'язок:</p>
+	<div class="container"></div>
+	<script>
+	function onCardClick(){
+		const clickedCard = this
+		clickedCard.parentElement.className = 'card-selected'
+	}
+	function createCardProduct(imgPath){
+		const divEl = document.createElement('div')
+		divEl.className = 'card'
+		const imgEl = document.createElement('img')
+		imgEl.setAttribute('src', imgPath)
+		imgEl.setAttribute('alt', 'Product Image')
+		imgEl.onclick = onCardClick
+		divEl.append(imgEl)
+		return divEl
+	}
+	const productList = [
+		'../img/product1.JPG',
+		'../img/product2.JPG',
+		'../img/product3.JPG',
+		'../img/product4.JPG',
+	]
+
+	window.onload = function(){
+		for (let i = 0; i < productList.length; i++) {
+			document.querySelector('.container').append(createCardProduct(productList[i]))			
+		}
+	}
+	</script>
+</body>
+</html>

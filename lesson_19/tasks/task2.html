@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		div{
+			margin-bottom: 10px;
+			cursor: pointer;
+			font-size: 20px;
+			font-weight: 800;
+			border: 2px solid blueviolet;
+			max-width: 200px;
+			text-align: center;
+			padding: 10px;
+		}
+	</style>
+	<title>Домашка №19. DOM - практика</title>
+</head>
+<body>
+	<h3>Задача</h3>
+	<p>Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)</p>
+	<p>Розв'язок</p>
+	<div>
+		Value 1 <input type="number" name="counterInput">
+		Value 2 <input type="number" name="counterInput">
+		Value 3 <input type="number" name="counterInput">
+		Value 4 <input type="number" name="counterInput">
+		Value 5 <input type="number" name="counterInput">
+	</div>
+	<script>
+		function changeInputValue(){
+			const thisInput = this
+			let input = thisInput
+			let inputValue = 0
+			while (input.previousElementSibling !== null){
+				inputValue = input.value
+				input = input.previousElementSibling
+				input.value = parseFloat(inputValue) - 1
+			}
+			input = thisInput
+			while(input.nextElementSibling !== null){
+				inputValue = input.value
+				input = input.nextElementSibling
+				input.value = parseFloat(inputValue) + 1
+			}
+		}
+			const inputList = document.querySelectorAll('input')
+			for (const inputEl of inputList) {
+				inputEl.onchange = changeInputValue
+			}
+	</script>
+</body>
+</html>
