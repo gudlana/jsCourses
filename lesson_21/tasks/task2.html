@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка №21. Задача 3</title>
+</head>
+<body>
+	<script>
+		class ParentObject{
+			constructor(x,y, imgUrl, interval){
+				this.x = x
+				this.y = y
+				this.imgUrl = imgUrl
+				this.interval = interval
+				this.el = this.render()
+			}
+			render(){
+				let imgEl = document.createElement("img")
+				imgEl.style.width = '100px'
+				imgEl.setAttribute("src", this.imgUrl)
+				imgEl.style.position = "absolute"
+				imgEl.style.left = `${this.x}px` 
+				imgEl.style.top = `${this.y}px` 
+				document.body.append(imgEl)
+				return imgEl
+			}
+		}
+		class House extends ParentObject{
+			constructor(x,y, imgUrl, interval){
+				super(x,y, imgUrl, interval)
+			}
+			scale(){
+				setInterval(()=>{
+					let randomMove = (10 + Math.floor(Math.random()*5))/10 
+					this.el.style.transform = `scale(${randomMove})`
+				}, this.interval)
+			}
+		}
+
+		class Dog extends ParentObject{
+			constructor(x,y, imgUrl, interval){
+				super(x,y, imgUrl, interval)
+			}
+			move() {
+          setInterval(() => {
+            let randomShift = -100 + Math.floor(Math.random() * 201)
+            this.el.style.left = `${parseFloat(this.el.style.left) + randomShift}px`
+          }, this.interval)
+        }
+		}
+
+		class Bird extends ParentObject{
+			constructor(x,y, imgUrl, interval){
+				super(x,y, imgUrl, interval)
+			}
+			fly(){
+				setInterval(()=>{
+					let randomLeftFly = -100 + Math.floor(Math.random() * 201);
+            	let randomTopFly= -100 + Math.floor(Math.random() * 201);
+           		this.el.style.left = `${parseFloat(this.el.style.left) + randomLeftFly}px`;
+            	this.el.style.top = `${parseFloat(this.el.style.left) + randomTopFly}px`;
+				}, this.interval)
+			}
+		}
+
+		let house = new House(100,100,'img/house.png', 2000)
+		let dog = new Dog(300,200,'img/dog.png', 1000)
+		let bird = new Bird(500,300,'img/bird.png', 1000)
+
+		house.scale()
+		dog.move()
+		bird.fly()
+	</script>
+</body>
+</html>

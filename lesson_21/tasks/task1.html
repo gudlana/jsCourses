@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка №21. Задача 1-2</title>
+</head>
+<body>
+	<div class="client"></div>
+	<script>
+		class Client{
+			#id
+			#clientName
+			#balance = 0
+			constructor(clientName){
+				this.ClientName = clientName
+				this.#id = this.generateId()
+			}
+			get Id(){
+				return this.#id
+			}
+			generateId(){
+				let timestamp = new Date().getTime()
+				let randomNum = Math.floor(Math.random()*10000)
+				return timestamp + '_' + randomNum
+			}
+			get ClientName(){
+				return this.#clientName
+			}
+			set ClientName(newClientName){
+				if (newClientName.length === 0) throw new Error('ClientName can`t be empty')
+				this.#clientName = newClientName
+			}
+			get Balance(){
+				return this.#balance
+			}
+			addBalance(amount){
+				if (amount < 0) throw new Error('Balance can`t be negative')
+				this.#balance += amount
+			}
+			getBalance(value){
+				if (value < 0 || this.Balance < value) throw new Error('немає стільки коштів на рахунку для зняття')
+				this.#balance -= value
+			}
+			toString(){
+				return `Клієнт банку №${this.Id}: ${this.ClientName}, на рахунку: ${this.Balance} грн.`
+			}
+		}
+		class GoldenClient extends Client{
+			#limit = 0
+			#percent = 0
+			constructor(clientName, limit, percent){
+				super(clientName)
+				this.Limit = limit
+				this.Percent = percent
+			}
+			get Limit(){
+				return this.#limit
+			}
+			set Limit(newLimit){
+				if (newLimit < 0) throw new Error('Limit can`t be negative')
+				this.#limit = newLimit
+			}
+			get Percent(){
+				return this.#percent
+			}
+			set Percent(newPercent){
+				if (newPercent < 0) throw new Error('Percent can`t be negative')
+				this.#percent = newPercent
+			}
+			getPersentCreditBalance(){
+				return (this.Limit * this.Percent)/100
+			}
+			toString(){
+				return `Клієнт банку №${this.Id}: ${this.ClientName}, на рахунку ${this.Balance} грн., кредит: ${this.#limit} грн., пеня за використання кредитних коштів ${this.getPersentCreditBalance()} грн.`
+			}
+		}
+		class Bank{
+			constructor(){
+				this.clientsList = []
+				// this.el = this.render()
+			}
+			addClient(client){
+				this.clientsList.push(client)
+			}
+			getClientsSection(){
+				const clientSectionEl = document.createElement('ol')
+				const titleEl = document.createElement('h3')
+				titleEl.innerText = 'Прості клієнти банку'
+				clientSectionEl.append(titleEl)
+				this.clientsList.forEach(client =>{
+					if (!(client instanceof GoldenClient)){
+						const clientEl = document.createElement('li')
+						clientEl.innerText = client
+						clientSectionEl.append(clientEl)
+					}
+				})
+				return clientSectionEl
+			}
+			getGoldenClientsSection(){
+				const clientGoldenSectionEl = document.createElement('ul')
+				const titleEl = document.createElement('h3')
+				titleEl.innerText = 'VIP клієнти банку'
+				clientGoldenSectionEl.append(titleEl)
+				this.clientsList.forEach(client =>{
+					if (client instanceof GoldenClient){
+						const clientEl = document.createElement('li')
+						clientEl.innerText = client
+						clientGoldenSectionEl.append(clientEl)
+					}
+				})
+				return clientGoldenSectionEl
+			}
+			getTotalBalanceSection(){
+				const containerEl = document.createElement('div')
+				const totalBalance = this.clientsList.reduce((prevSum, client)=>
+				prevSum + client.Balance, 0)
+				containerEl.innerText = `На рахунках у клієнтів банку: ${totalBalance} грн.`
+				return containerEl
+			}
+		}
+		try{			
+			const client1 = new Client('Alex')
+			const client2 = new GoldenClient('Svitlana', 1000,5)
+			const client3 = new Client('Dmytro')
+			const client4 = new GoldenClient('Yudgin', 5000,2)
+			
+			client1.addBalance(2000)
+			client2.addBalance(5000)
+			client3.addBalance(4000)
+			client4.addBalance(7000)
+
+			const bank = new Bank()
+			bank.addClient(client1)
+			bank.addClient(client2)
+			bank.addClient(client3)
+			bank.addClient(client4)
+
+			document.querySelector('.client').append(bank.getClientsSection())
+			document.querySelector('.client').append(bank.getGoldenClientsSection())
+			document.querySelector('.client').append(bank.getTotalBalanceSection())
+		} 
+		catch(e){
+			const errorLog = document.createElement('div')
+			errorLog.innerText = `${e}`
+			document.querySelector('.client').append(errorLog)
+		}		
+	</script>
+</body>
+</html>

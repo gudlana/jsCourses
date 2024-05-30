@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка №21. Задача 4</title>
+</head>
+<style>
+	.container *{
+		margin-bottom: 10px;
+	}
+</style>
+<body>
+	<script>
+		class IsNotMonthError extends Error{
+			constructor(){
+				super()
+				this.message = 'Номер місяця має бути і диапазоні від 1 до 12'
+				this.name = "IsNotMonthError"
+			}
+		}
+		class IsNotScorsesError extends Error{
+			constructor(){
+				super()
+				this.message = 'Невірне значення оцінки'
+				this.name = 'IsNotScorsesError'
+			}
+		}
+		class IsVacationError extends Error{
+			constructor(){
+				super()
+				this.message = 'Канікули!'
+				this.name = 'IsVacationError'
+			}
+		}
+		class ScorsesCorrection{
+			constructor(parentSelector){
+				this.el = this.render(parentSelector)
+			}
+			sendEvent(evenType){
+				const event = new CustomEvent(evenType,{
+					detail:{correct: this},
+					bubbles: true
+				})
+				this.el.dispatchEvent(event)
+			}
+			isVacation(month){
+				const vacations = [1,6,7,8]
+				return vacations.includes(Number(month))
+			}
+			canCorrectScorses(){
+				if (this.scorses > 6 || this.month === 5 || this.isVacation(this.month)){
+					return false
+				}
+				return true
+			}
+			createMonthInput(){
+				const divEl = document.createElement('div')
+				const labelEl = document.createElement('label')
+				labelEl.innerText = 'Місяць'
+				const inputEl = document.createElement('input')
+				inputEl.setAttribute('name', 'monthValue')
+				inputEl.className = 'month-input'
+				inputEl.setAttribute('type', 'number')
+				inputEl.onchange = ()=> this.sendEvent('changeMonth')
+				labelEl.append(inputEl)		
+				divEl.append(labelEl)		
+				return divEl
+			}
+			createScorsesInput(){
+				const divEl = document.createElement('div')
+				const labelEl = document.createElement('label')
+				labelEl.innerText = 'Оцінка'
+				const inputEl = document.createElement('input')
+				inputEl.setAttribute('name', 'scorsesValue')
+				inputEl.className = 'scorses-input'
+				inputEl.setAttribute('type', 'number')
+				inputEl.onchange = ()=> this.sendEvent('changeScorses')
+				labelEl.append(inputEl)
+				divEl.append(labelEl)		
+				return divEl
+			}
+			onChangeMonthValue(){
+				try{
+					this.month = document.querySelector('.month-input').value
+					if (isNaN(this.month) || this.month < 1 || this.month > 12)	throw new IsNotMonthError()					
+					if (this.isVacation(this.month)) throw new IsVacationError()
+				}
+				catch(err){
+					if (err instanceof IsNotMonthError) {
+						this.messageEl.innerText = err.message
+					} 
+					else if (err instanceof IsVacationError){
+						this.messageEl.innerText = err.message
+					}
+					else this.messageEl.innerText = err.message
+				} 
+			}
+			onChangeScorsesValue(){
+				try{
+					this.scorses = document.querySelector('.scorses-input').value
+					if (isNaN(this.scorses) || this.scorses < 1 || this.scorses > 100)
+					throw new IsNotScorsesError()
+				} catch(err){
+					if (err instanceof IsNotScorsesError){
+						this.messageEl.innerText = err.message
+					}else this.messageEl.innerText = err.message
+				}
+			} 
+			createBtnSubmit(){
+				const btnEl = document.createElement('button')
+				btnEl.className = 'check-info'
+				btnEl.innerText = 'Ок'
+				btnEl.onclick = ()=> this.sendEvent('checkScorses')
+				return btnEl
+			}
+			onCheckScorses(){
+				if (this.canCorrectScorses()){
+					this.messageEl.innerText = 'Ви можете виправити оцінку.'
+				} else this.messageEl.innerText = 'Ви не можете виправити оцінку.'
+			}
+			createMessageContainer(){
+				this.messageEl = document.createElement('div')
+				this.messageEl.innerText = ''
+				return this.messageEl
+			}
+			render(parentSelector){
+				const appContainer = document.createElement('div')
+				appContainer.append(this.createMonthInput())
+				appContainer.append(this.createScorsesInput())
+				appContainer.append(this.createBtnSubmit())
+				appContainer.append(this.createMessageContainer())
+				appContainer.addEventListener('changeMonth', this.onChangeMonthValue.bind(this))
+				appContainer.addEventListener('changeScorses', this.onChangeScorsesValue.bind(this))
+				appContainer.addEventListener('checkScorses', this.onCheckScorses.bind(this))
+				document.querySelector(parentSelector).append(appContainer)
+				return appContainer
+			}
+		}
+
+		window.onload = function(){
+			const checkScorsesForm = new ScorsesCorrection('.container')
+		}
+	</script>
+		<div class="container"></div>
+</body>
+</html>

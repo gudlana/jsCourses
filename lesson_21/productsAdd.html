@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="container"></div>
+	<script>
+		class AgeInput{
+			constructor(targetSelector){
+				this.createElement()
+				if (targetSelector) this.render(targetSelector)
+			}
+			onChange(){
+				const changeAge =new CustomEvent('changeAge', {
+					detail: {
+						age: this.ageInput.value,
+					},
+				})
+				this.el.dispatchEvent(changeAge)
+			}
+			createElement(){
+				const {label, input} = this.createContentElement()
+				this.el = label
+				input.addEventListener('change',this.onChange.bind(this))
+				this.ageInput = input
+			}
+			createContentElement(){
+				const label = document.createElement('label')
+				label.innerText = 'Вік користувача'
+				const input = document.createElement('input')
+				input.type='number'
+				label.append(input)
+				return{label, input}
+			}
+			render(targetSelector){
+				document.querySelector(targetSelector).append(this.el)
+			}
+		}
+		class AdSelector{
+			constructor(addList, targetSelector){
+				this.addList = addList
+				this.el = this.createElement()
+				if (targetSelector) this.render(targetSelector)
+				this.onAgeChange = this.onAgeChange.bind(this)
+			}
+			createElement(){
+				return document.createElement('div')
+			}
+			showAd(selectedAge){
+				const adItem = this.addList.find(
+					(item)=>selectedAge >=item.minAge && selectedAge <= item.maxAge
+				)
+				if (adItem) this.el.innerHTML = adItem.message
+				else this.el.innerHTML = 'Age not selected'
+			}
+			onAgeChange(event){
+				const selectedAge = event?.detail.age
+				this.showAd(selectedAge)
+			}
+			render(targetSelector){
+				document.querySelector(targetSelector).append(this.el)
+			}
+		}
+		const adList = [
+        {
+          minAge: 10,
+          maxAge: 15,
+          message: 'Phone',
+        },
+        {
+          minAge: 16,
+          maxAge: 25,
+          message: 'Car',
+        },
+        {
+          minAge: 26,
+          maxAge: 45,
+          message: 'Helicopter',
+        },
+      ]
+		window.onload = function(){
+			const ageInput = new AgeInput('#container')
+			const addSelector = new AdSelector(adList, '#container')
+			ageInput.el.addEventListener('changeAge', addSelector.onAgeChange)
+		}
+	</script>
+</body>
+</html>
