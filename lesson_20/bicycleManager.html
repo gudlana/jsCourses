@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ДЗ №20. Практика. Події</title>
+	<style>
+		.user-container{
+			width: 400px;
+			display: flex;
+			justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div id="cnt"></div>
+	<script>
+		class User{
+			constructor(userName, containerSelector, containerEl){
+				this.userName = userName
+				this.el= this.render(containerSelector, containerEl)
+			}
+			sendEvent(evenType){
+				const event = new CustomEvent(evenType,{
+					detail:{user:this.userName},
+					bubbles: true
+				})
+				this.el.dispatchEvent(event)
+			}
+			render(containerSelector, containerEl){
+				const container = document.createElement('div')
+				container.className = 'user-container'
+
+				const nameDiv = document.createElement('div')
+				nameDiv.innerText = this.userName
+				container.append(nameDiv)
+
+				const actionBlockDiv = document.createElement('div')
+
+				const addBtn = document.createElement('button')
+				addBtn.innerText = 'Залишити'
+				addBtn.onclick = ()=> this.sendEvent('addBycicle')
+				actionBlockDiv.append(addBtn)
+
+				const getBnt = document.createElement('button')
+				getBnt.innerText = 'Забрати'
+				getBnt.onclick = ()=> this.sendEvent('getBycicle')
+				actionBlockDiv.append(getBnt)
+
+				container.append(actionBlockDiv)
+				
+				if (containerEl) containerEl.append(container)
+				else document.querySelector(containerSelector).append(container)
+				return container
+			}
+		}
+		// =================
+		class BycicleManager{
+			constructor(userList, bycicleCount,parentContainerSelector){
+				this.userList = userList
+				this.bycicleCount = bycicleCount
+				this.el = this.render(parentContainerSelector)
+			}
+			createManagerTitle(){
+				const titleContainer = document.createElement('div')
+				titleContainer.innerText = 'Вільні велосипеди: '
+				this.bycicleNumberSpan = document.createElement('span')
+				this.bycicleNumberSpan.innerText = this.bycicleCount
+				titleContainer.append(this.bycicleNumberSpan)
+				return titleContainer
+			}
+			onAddBycicle(){
+				this.bycicleCount++
+				this.updateBycicleCount()
+			}
+			updateBycicleCount(){
+				this.bycicleNumberSpan.innerText = this.bycicleCount
+			}
+			onGetBycicle(){
+				if (this.bycicleCount > 0) this.bycicleCount--
+				this.updateBycicleCount()
+			}
+			createUsersListContainer(){
+				const listContainer = document.createElement('div')
+
+				for (const userName of this.userList) {
+					new User(userName, null, listContainer)
+				}
+
+				listContainer.addEventListener('addBycicle', this.onAddBycicle.bind(this))
+				listContainer.addEventListener('getBycicle', this.onGetBycicle.bind(this))
+
+				return listContainer
+			}
+			render(parentContainerSelector){
+				const appContainer = document.createElement('div')
+				appContainer.append(this.createManagerTitle())
+				const listHeader = document.createElement('h2')
+				listHeader.innerText = 'Клуб велосипедистів'
+				appContainer.append(listHeader)
+
+				appContainer.append(this.createUsersListContainer())
+				document.querySelector(parentContainerSelector).append(appContainer)
+				return appContainer
+			}
+		}
+		window.onload = function(){
+			const users = ['Alex', 'Olga', 'Petro', 'Dmytro']
+			const manager = new BycicleManager(users, 0, '#cnt')
+		}
+	</script>
+</body>
+</html>
