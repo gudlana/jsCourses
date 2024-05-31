@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 12</title>
+</head>
+<body>
+	<h3>Задача 12</h3>
+	<p> Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і  вставкою.</p>
+	<script>
+		let arrNumb = []
+		function getRandomArrayNumbers(countNumbers, minNum, maxNum, array){
+			for (let i = 0; i < countNumbers; i++) {
+				const randomNumber = minNum + Math.floor(Math.random()* (maxNum - minNum + 1))
+				array.push(randomNumber)
+			}
+		}
+
+		getRandomArrayNumbers(1000,1,800, arrNumb)
+		let bubbleSortArray = [...arrNumb]
+		let insertSortArray = [...arrNumb]
+
+		function getTimeBubblesSort(array) {
+			const start = new Date()
+			let changed
+			do{
+				changed = false
+				for (let i = 1; i < array.length; i++){
+					if (array[i-1]> array[i]){
+						let tmp = array[i-1]
+						array[i-1] = array[i]
+						array[i] = tmp
+						changed = true
+					}
+				}
+			}	while(changed)
+			const end = new Date()
+			const time = (end - start)/ 1000
+			return `Час сортування бульбашкою ${time}c`
+		}
+		function getTimeInsertSortArray(array) {
+			const start = new Date()
+			for (let k = 1; k < array.length; k++) {
+				const currentElement = array[k]
+				let i = k-1
+				while(i >=0 && array[i] > currentElement){
+					array[i + 1] = array[i]
+					i = i - 1
+				}
+				array[i+1] = currentElement
+			}
+			const end = new Date()
+			const time = (end-start)/1000
+			return `Час сортування включенням ${time}c`
+		}
+		document.write(`Дано масив: <br> ${arrNumb}<br>`)
+		document.write(`${getTimeBubblesSort(bubbleSortArray)}<br>`)
+		document.write(`${getTimeInsertSortArray(insertSortArray)}`)
+	
+	</script>
+</body>
+</html>

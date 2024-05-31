@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача </title>
+</head>
+<body>
+	<h3>Задача 6</h3>
+	<p>Вивести скільки зараз годин у Лондоні, Парижі, Сіднеї.</p>
+	<script>
+		function getCurrentTimeInTimeZone(timeZone) {
+			return new Date().toLocaleTimeString('en-US', {timeZone: timeZone})
+		}
+		const londonTime = getCurrentTimeInTimeZone('Europe/London')
+		const parisTime = getCurrentTimeInTimeZone('Europe/Paris')
+		const sydneyTime = getCurrentTimeInTimeZone('Australia/Sydney')
+
+		document.write(`Поточний час в Лондоні: ${londonTime}<br>`)
+		document.write(`Поточний час в Парижі: ${parisTime}<br>`)
+		document.write(`Поточний час в Сіднеї: ${sydneyTime}`)
+	</script>
+</body>
+</html>

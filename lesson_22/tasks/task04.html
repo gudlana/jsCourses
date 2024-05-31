@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Задача 7</title>
+</head>
+<body>
+	<h3>Задача 7</h3>
+	<p>Дано список студентів (ім’я і дата народження: у формі тексту (день.місяць.рік). Знайти найстаршого студента</p>
+
+	<div id="students-list"></div>
+	<div id="oldest-student"></div>
+	<script>
+		let studentsList = [
+			{
+				studentName: "Олександр",
+				studentBirthday: {
+					year: 2001,
+					month: 8,
+					day: 14,
+				},
+			},
+			{
+				studentName: "Світлана",
+				studentBirthday: {
+					year: 1981,
+					month: 8,
+					day: 14,
+				},
+			},
+			{
+				studentName: "Євген",
+				studentBirthday: {
+					year: 1976,
+					month: 10,
+					day: 10,
+				},
+			},
+			{
+				studentName: "Дмитро",
+				studentBirthday: {
+					year: 2012,
+					month: 8,
+					day: 17,
+				},
+			},
+		]
+		function getStudentsList(studentsList) {
+			const olEl = document.createElement('ol')
+			for (let i = 0; i < studentsList.length; i++) {
+				const liEl = document.createElement('li')
+				liEl.innerText = `${studentsList[i].studentName}, дата народження: ${studentsList[i].studentBirthday.day}.${studentsList[i].studentBirthday.month}.${studentsList[i].studentBirthday.year}`
+				olEl.append(liEl)				
+			}
+			return olEl
+		}
+		function getOldestStudent(studentsList) {
+			const oldestStudents = studentsList.reduce(
+				(prev, el) =>{
+					let birthday = new Date(el.studentBirthday.year, el.studentBirthday.month, el.studentBirthday.day)
+					if (birthday.getTime() < prev.date){
+						prev.studentName = el.studentName
+						prev.date = birthday
+					}
+					return prev
+				},
+				{date: Infinity}
+			)
+			return oldestStudents.studentName
+		}
+
+		document.getElementById('students-list').append(getStudentsList(studentsList))
+		document.getElementById('oldest-student').append(`Найстарший студент: ${getOldestStudent(studentsList)}`)
+	</script>
+</body>
+</html>
