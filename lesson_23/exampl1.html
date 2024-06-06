@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	#container{
+		display: flex;
+		gap: 20px;
+	}
+	#candidates div::after {
+		cursor: pointer;
+		content: '\2192';
+		color: green;
+		font-size: 24px;
+		padding-left: 5px;
+	}
+	#selected div::after {
+		cursor: pointer;
+		content: '\2190';
+		color: red;
+		font-size: 24px;
+		padding-left: 5px;
+	}
+</style>
+<body>
+	<div id="container">
+		<div>
+			<h1>candidates</h1>
+			<div id="candidates">
+				<div>aaaaa</div>
+				<div>sdsss</div>
+				<div>ddddd</div>
+			</div>
+		</div>
+		<div>
+			<h1>selected</h1>
+			<div id="selected">
+				<div>jjjj</div>
+				<div>ppppp</div>
+				<div>fffff</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		container.onclick = function(e){
+			const target = e.target
+			if (target.closest('#candidates')) selected.append(target)
+			else if (target.closest('#selected')) candidates.append(target)
+		}
+
+		function getMessage(fixedParts, gender, name, age){
+			const genderLabel = gender === 'm' ? 'пан' : 'пані '
+			const pensionerTitle = 
+				(gender === 'm' && age >=65) || (gender === 'w' && age >=60)
+				? 'пенсіонер'
+				: 'не пенсіонер'
+			return `${genderLabel}${fixedParts[1]}${name}${fixedParts[2]}${pensionerTitle}`
+		}		
+		let userName = 'Alex'
+		let gender = 'm'
+		let age = 22
+
+		let message = getMessage` ${gender} ${userName} : ${age}`
+		document.write(message)
+	</script>
+</body>
+</html>

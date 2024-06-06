@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Домашка №23</title>
+</head>
+<body>
+	<h1>Домашка №23</h1>
+	<script>
+		// Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази)
+		document.write('Задача 1 <br><br>')
+		let arr1 = ['в цьому рядку немає цифр','в цьому рядку є цифри 0123456789','hsdbvb 7777','785 ggg 777 aaa','53535353 jh']
+		if (arr1.some(el=>/\d/.test(el))) document.write(arr1.filter(el=>/\d/g.test(el)))
+		else document.write('No searching string')		
+
+		// Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+		document.write('<br><br>Задача 2 <br><br>')
+		let arr2 = ['в цьому рядку немає цифр','в цьому рядку є цифри 0123456789','в цьому рядку немає цифр, але є інші символи ?*','785ggg777aaa','53535353jh']
+		if (arr2.some(el=>!/\d/.test(el))) document.write(arr2.filter(el=>!/\d/g.test(el)))
+		else document.write('No searching string')		
+
+		// Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+		document.write('<br><br>Задача 3 <br><br>')
+		let arr3 = ['Дано масив рядків.','Вивести ті, у яких є голосні літери','ппппп рррр зззз ддддд','в цих словах є голосні','в ць_м_ р_дк_ н_м__ г_л_сн_х л_т_р']
+		if (arr3.some(el=>/[уеіаоєяию]/i.test(el))) document.write(arr3.filter(el=>/[уеіаоєяию]/i.test(el)))
+		else document.write('No searching string')
+
+		// Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+		document.write('<br><br>Задача 4 <br><br>')
+		let arr4 = ['Дано масив рядків.','Вивести ті, у яких є голосні літери','ппппп рррр зззз ддддд','в цих словах є голосні','в ць_м_ р_дк_ н_м__ г_л_сн_х л_т_р']
+		if (arr4.some(el=>!/[уеіаоєяию]/i.test(el))) document.write(arr4.filter(el=>!/[уеіаоєяию]/i.test(el)))
+		else document.write('No searching string')
+
+		// Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+		document.write('<br><br>Задача 5 <br><br>')
+		let arr5 = ['в цьому рядку є цифра 1','а в цьому рядку є цифра 3','в цьому рядку є цифра 5']
+		if (arr5.some(el=>/1|3/.test(el))) document.write(arr5.filter(el=>/1|3/g.test(el)))
+		else document.write('No searching string')
+
+		// Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+		document.write('<br><br>Задача 6 <br><br>')
+		let str6 = 'В цьому рядку зазначено такі цифри 23 6 963 2024 10 1500'
+		document.write(str6.match(/\d+(\.\d+)?/g))
+
+		// Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+		document.write('<br><br>Задача 7 <br><br>')
+		let str7 = 'Hello, world! How\'s everything? Good, I hope.'
+		document.write(str7.match(/\W/g))
+
+		// Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+		document.write('<br><br>Задача 8 <br><br>')
+		let str8 = 'Hello, world! How\'s everything? Good, I hope.'
+		document.write(str8.split(/[.,!?]/))
+
+		// Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+		document.write('<br><br>Задача 9 <br><br>')
+		let str9 = 'Цей рядок містить дату 04.05.2024'
+		if(/\d{2}.\d{2}.\d{4}/g.test(str9)) {
+			alert('Yes')
+			document.write(str9.match(/\d{2}.\d{2}.\d{4}/g))
+		}
+		else alert('No')
+
+		// Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+		document.write('<br><br>Задача 10 <br><br>')
+		let str10 = 'hghbgb 10 ksks 1 jsadg 56 dddd89dddd6 4555'
+		let regex = /\b\d{2}\b/g
+		if (regex.test(str10)) document.write(`Кількість двоцифрових чисел: ${str10.match(regex).length}`)
+		else document.write('Двоцифрові числа не знайдено')
+
+		// Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+		document.write('<br><br>Задача 11 <br><br>')
+		let str11 = '4142-3433-2323-3434 23698-956322 1212-2323-4545-5656'
+		// let reg = /\b\d{4}-\d{4}-\d{4}-\d{4}\b/g
+		let reg = new RegExp('\\b\\d{4}-\\d{4}-\\d{4}-\\d{4}\\b','g')
+		if (reg.test(str11))	document.write(str11.match(reg))
+		else document.write('Не знайдено номер банківської карти')
+
+		// Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+		document.write('<br><br>Задача 12 <br><br>')
+		let url = 'https://somesourse.gov.ua'
+		if (/.gov./i.test(url)) document.write('Цей сайт урядовий')
+		else document.write('Цей сайт не є урядовим')
+
+		// Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення
+		document.write('<br><br>Задача 13 <br><br>')
+		let str12 = '1985 2222 2089 2024 2021'
+		let regexYear = /\b(202[2-9]|20[3-9]\d|2[1-9]\d{2}|\d{5,})\b/g
+		if (regexYear.test(str12)) document.write(`Усі роки після 2021: ${str12.match(regexYear)}`)
+		else document.write('Не знайдено шукані роки')
+
+		// Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+		document.write('<br><br>Задача 14 <br><br>')
+		let phoneNumb = '+380674942029'
+		let regexPhoneUkraine = /\+38/
+		if (regexPhoneUkraine.test(phoneNumb)) document.write(`Цей номер українського оператора: ${phoneNumb}`)
+		else document.write('Номер телефону не з України')
+
+		// Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.
+		document.write('<br><br>Задача 15 <br><br>')
+		let strName = prompt('Введіть прізвище та ім\'я через пробіл')
+		if (/\s/g.test(strName)) document.write(strName.replace((strName.match(/\s/g)), '-'))
+		else document.write('Дотримуйтеся шаблону - прізвище та ім\'я через пробіл')
+		
+		// Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+		document.write('<br><br>Задача 16 <br><br>')
+		let strDate = prompt('Введіть дату в форматі «день.місяць.рік»')
+		document.write(strDate.replace(/\./g,'/'))
+
+		// Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи  є це день вихідним
+		document.write('<br><br>Задача 17 <br><br>')
+		let day = prompt('Day')
+		if (/[06s]/.test(day)) document.write('weekend')
+		else document.write('working day')
+	</script>
+</body>
+</html>
